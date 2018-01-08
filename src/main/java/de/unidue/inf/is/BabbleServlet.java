@@ -12,7 +12,7 @@ import de.unidue.inf.is.utils.DBUtil;
 
 
 /**
- * Das könnte die Eintrittsseite sein.
+ * Das könnte die Eintrittsseite sein. da
  */
 public final class BabbleServlet extends HttpServlet {
 
