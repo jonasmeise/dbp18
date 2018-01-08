@@ -46,7 +46,7 @@ body{
 	   
 		<div id="site">
 		<p>
-			Die bro Datenbank "${db2name}" ist ${db2exists}
+			Die Datenbank "${db2name}" ist ${db2exists}
 		</p>
 		</div>
 	</div>
