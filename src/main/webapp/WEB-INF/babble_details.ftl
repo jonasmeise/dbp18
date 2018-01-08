@@ -1,5 +1,5 @@
 <html>
-<head><title>babble_create</title>
+<head><title>babble_details</title>
 <body>
 TODO HIER KOMMT DER BABBLE HIN
 </textarea>
