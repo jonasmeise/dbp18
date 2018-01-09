@@ -37,10 +37,10 @@
 </div>
 </header>
 
-<p>${user.profilepic}</p>
-<p>Benuter:  ${user.username} </p>
-<p>Name: ${user.firstname} ${user.lastname}</p>
-<p>Status: ${user.status}</p>
+<p>{user.profilepic}</p>
+<p>Benuter:  {user.username} </p>
+<p>Name: {user.firstname} ${user.lastname}</p>
+<p>Status: {user.status}</p>
 
 <form align="right" action="theia.is.uni-due.de:9018/babble_create"> 
     <input type="submit" value="New Babble"/>
