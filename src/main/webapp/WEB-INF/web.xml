@@ -69,7 +69,7 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>user_profile</servlet-name>
+		<servlet-name>user_profileServlet</servlet-name>
 		<servlet-class>de.unidue.inf.is.user_profileServlet</servlet-class>
 	</servlet>
 
@@ -79,7 +79,7 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>babble_search</servlet-name>
+		<servlet-name>babble_searchServlet</servlet-name>
 		<servlet-class>de.unidue.inf.is.babble_searchServlet</servlet-class>
 	</servlet>
 
@@ -89,7 +89,7 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>babble_create</servlet-name>
+		<servlet-name>babble_createServlet</servlet-name>
 		<servlet-class>de.unidue.inf.is.babble_createServlet</servlet-class>
 	</servlet>
 
@@ -99,7 +99,7 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>babble_details</servlet-name>
+		<servlet-name>babble_detailsServlet</servlet-name>
 		<servlet-class>de.unidue.inf.is.babble_detailsServlet</servlet-class>
 	</servlet>
 
