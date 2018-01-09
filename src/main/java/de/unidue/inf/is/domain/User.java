@@ -12,7 +12,11 @@ public final class User {
     public User() {
     }
 
-
+    public User(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    
     public User(String firstname, String lastname,String status, String username, String profilepic) {
         this.firstname = firstname;
         this.lastname = lastname;
