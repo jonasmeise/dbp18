@@ -46,7 +46,7 @@ public final class user_profileServlet extends HttpServlet {
 			}
 		}
     	
-    	String abc;
+    	String abc = null;
     	try {
 			abc = resultSet.getString(0);
 			System.out.println(abc);
