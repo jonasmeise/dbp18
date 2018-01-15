@@ -30,17 +30,23 @@ public final class user_profileServlet extends HttpServlet {
     	DBUtil myDB = null;
     	try {
 			myConnection = myDB.getConnection("babble");
-			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT * FROM BabbleUser WHERE username=Foobar");
+			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT * FROM BabbleUser WHERE username = ?");
+			myPrepStatement.setString(1, "FooBar");
 			resultSet = myPrepStatement.executeQuery();
 			
+			
+		//	StringBuffer outb = new StringBuffer();
+			//while (resultSet.next()) {
+				System.out.println(resultSet.getString(1));
+				System.out.println(resultSet.getString(2));
+				System.out.println(resultSet.getString(3));
+				System.out.println(resultSet.getString(4));
 
-			StringBuffer outb = new StringBuffer();
-			while (resultSet.next()) {
-				String name = resultSet.getString("username");
-				outb.append(name).append("<br>");
-			}
-			out = outb.toString();
-			System.out.println(out);
+			//String name = resultSet.getMetaData();
+			//	outb.append(name).append("<br>");
+			//}
+		//	out = outb.toString();
+			//System.out.println(out);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -57,8 +63,8 @@ public final class user_profileServlet extends HttpServlet {
 			System.out.println(resultSet==null);
 
 
-			request.setAttribute("userprofilepic", "test");
-			request.setAttribute("username", out);
+	//		request.setAttribute("userprofilepic", "test");
+	//		request.setAttribute("username", out);
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
         
         
