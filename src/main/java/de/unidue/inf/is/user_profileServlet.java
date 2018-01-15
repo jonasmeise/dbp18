@@ -30,7 +30,7 @@ public final class user_profileServlet extends HttpServlet {
     	DBUtil myDB = null;
     	try {
 			myConnection = myDB.getConnection("babble");
-			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT username FROM BabbleUser");
+			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT * FROM BabbleUser WHERE username=Foobar");
 			resultSet = myPrepStatement.executeQuery();
 			
 
