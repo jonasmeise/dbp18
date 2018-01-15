@@ -29,14 +29,10 @@ public final class user_profileServlet extends HttpServlet {
     	DBUtil myDB = null;
     	try {
 			myConnection = myDB.getConnection("babble");
-			PreparedStatement myPrepStatement = myDB.prepareSQL(myConnection, "SELECT ? FROM ?");
+			PreparedStatement myPrepStatement = myDB.prepareSQL(myConnection, "SELECT ? FROM ?;");
 			myPrepStatement.setString(1, "username");
 			myPrepStatement.setString(2, "BabbleUser");
 			resultSet = myPrepStatement.executeQuery();
-			
-	    	while(resultSet.next()) {
-	    		request.setAttribute("username", resultSet.getString("username"));
-	    	}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -51,7 +47,12 @@ public final class user_profileServlet extends HttpServlet {
 		}
     	
     	
-    	
+		try {
+			request.setAttribute("username", resultSet.getString("username"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
         
         
