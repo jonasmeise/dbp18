@@ -32,8 +32,7 @@ public final class DBUtil {
     
     
     public static Connection getConnection(String database) throws SQLException {
-        //final String url = "jdbc:db2:" + database;
-        final String url = "jdbc:db2://phoebe.is.inf.uni-due.de:50005/" + database + ":currentSchema=<dbp18>;";
+        final String url = "jdbc:db2:" + database;
         return DriverManager.getConnection(url);
     }
 
