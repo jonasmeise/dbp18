@@ -28,7 +28,7 @@ public final class user_profileServlet extends HttpServlet {
     	
     	DBUtil myDB = null;
     	try {
-			myConnection = myDB.getConnection("babble");
+			myConnection = myDB.getExternalConnection("babble");
 			PreparedStatement myPrepStatement = myDB.prepareSQL(myConnection, "SELECT ? FROM ?;");
 			myPrepStatement.setString(1, "username");
 			myPrepStatement.setString(2, "BabbleUser");
