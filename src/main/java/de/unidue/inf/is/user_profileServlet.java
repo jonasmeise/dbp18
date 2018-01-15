@@ -48,8 +48,7 @@ public final class user_profileServlet extends HttpServlet {
     	
     	String abc = null;
     	try {
-			abc = resultSet.getString(0);
-			System.out.println(abc);
+			System.out.println(resultSet==null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
