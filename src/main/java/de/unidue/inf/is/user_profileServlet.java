@@ -25,6 +25,7 @@ public final class user_profileServlet extends HttpServlet {
     	
     	Connection myConnection = null;
     	ResultSet resultSet = null;
+    	String out ="";
 		String dbusername = "";
 		String dbname = "";		
 		String dbstatus = "";
@@ -38,13 +39,14 @@ public final class user_profileServlet extends HttpServlet {
 			resultSet = myPrepStatement.executeQuery();
 			
 			
-			//StringBuffer outb = new StringBuffer();
-			
-			 dbusername = resultSet.getString(1);
+			StringBuffer outb = new StringBuffer();
+			while (resultSet.next()){
+				String temp = resultSet.getString("username");
+				outb.append(temp).append("<br/>");
+			}
+			 
 		
-			
-			
-		//	out = outb.toString();
+			out = outb.toString();
 			System.out.println(dbusername);
 			System.out.println(dbname);
 			System.out.println(dbstatus);
@@ -65,7 +67,7 @@ public final class user_profileServlet extends HttpServlet {
 
 
 			request.setAttribute("profilepic", "test");
-			request.setAttribute("username", dbusername);
+			request.setAttribute("username", out);
 			request.setAttribute("name", dbname);
 			request.setAttribute("status", dbstatus);
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
