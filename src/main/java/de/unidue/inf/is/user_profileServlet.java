@@ -34,7 +34,7 @@ public final class user_profileServlet extends HttpServlet {
 			myPrepStatement.setString(1, "username");
 			resultSet = myPrepStatement.executeQuery();
 			
-			request.setAttribute("username", resultSet.getString(1));
+			request.setAttribute("u", resultSet.getString(1));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
