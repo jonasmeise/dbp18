@@ -46,15 +46,9 @@ public final class user_profileServlet extends HttpServlet {
 			}
 		}
     	
-    	String abc = null;
-    	try {
 			System.out.println(resultSet==null);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-			request.setAttribute("username", abc);
+
+			request.setAttribute("username", "test");
 
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
         
