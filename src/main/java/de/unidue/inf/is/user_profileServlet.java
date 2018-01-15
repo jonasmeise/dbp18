@@ -34,20 +34,21 @@ public final class user_profileServlet extends HttpServlet {
     	DBUtil myDB = null;
     	try {
 			myConnection = myDB.getConnection("babble");
-			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT username FROM BabbleUser");
-			//myPrepStatement.setString(1, "FooBar");
+			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT username FROM BabbleUser WHERE username = ?");
+			myPrepStatement.setString(1, "FooBar");
 			resultSet = myPrepStatement.executeQuery();
 			
 			
-			//StringBuffer outb = new StringBuffer();
-			//while (resultSet.next()){
+			StringBuffer outb = new StringBuffer();
+		while (resultSet.next()){
 				String temp = resultSet.getString("username");
-				//outb.append(temp).append("<br/>");
-		//	}
+				outb.append(temp).append("<br/>");
+		}
 			 
 		
-			dbusername = temp;
-			dbname=temp.toString();
+			out = outb.toString();
+			dbusername = out;
+			dbname="fuckm";
 			dbstatus="test2";
 			System.out.println(dbusername);
 			System.out.println(dbname);
@@ -65,7 +66,7 @@ public final class user_profileServlet extends HttpServlet {
 			}
 		}
     	
-			System.out.println(resultSet==null);
+			System.out.println("ResultSet ist leer:" + resultSet==null);
 
 
 			request.setAttribute("profilepic", "test");
