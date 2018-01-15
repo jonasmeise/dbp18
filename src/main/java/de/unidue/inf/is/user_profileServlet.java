@@ -28,13 +28,12 @@ public final class user_profileServlet extends HttpServlet {
     	
     	DBUtil myDB = null;
     	try {
-			myConnection = myDB.getConnection("babble");
+			myConnection = myDB.getConnection("BabbleUser");
 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT ? FROM BabbleUser");
 			System.out.println(myConnection.getMetaData());
 			myPrepStatement.setString(1, "username");
 			resultSet = myPrepStatement.executeQuery();
 			
-			System.out.println(resultSet.getString(1));
 			request.setAttribute("u", resultSet.getString(1));
 			
 		} catch (SQLException e) {
