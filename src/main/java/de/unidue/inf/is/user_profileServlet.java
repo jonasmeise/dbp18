@@ -43,11 +43,11 @@ public final class user_profileServlet extends HttpServlet {
 			StringBuffer outStatus = new StringBuffer();
 		while (resultSet.next()){
 				String tempUserName = resultSet.getString("username");
-				outUserName.append(tempUserName).append("<br/>");
+				outUserName.append(tempUserName);
 				String tempName = resultSet.getString("name");
-				outUserName.append(tempName).append("<br/>");
+				outName.append(tempName);
 				String tempStatus = resultSet.getString("status");
-				outUserName.append(tempStatus).append("<br/>");
+				outStatus.append(tempStatus);
 				
 		}
 			 
