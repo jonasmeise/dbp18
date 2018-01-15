@@ -33,16 +33,16 @@ public final class user_profileServlet extends HttpServlet {
     	DBUtil myDB = null;
     	try {
 			myConnection = myDB.getConnection("babble");
-			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT * FROM BabbleUser WHERE username = ?");
+			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT username,name,status FROM BabbleUser WHERE username = ?");
 			myPrepStatement.setString(1, "FooBar");
 			resultSet = myPrepStatement.executeQuery();
 			
 			
-			StringBuffer outb = new StringBuffer();
+			//StringBuffer outb = new StringBuffer();
 			
 			 dbusername = resultSet.getString("username");
-			 dbname = resultSet.getString("username");
-			 dbstatus = resultSet.getString("username");
+			 dbname = resultSet.getString("name");
+			 dbstatus = resultSet.getString("status");
 			
 			
 		//	out = outb.toString();
@@ -65,8 +65,10 @@ public final class user_profileServlet extends HttpServlet {
 			System.out.println(resultSet==null);
 
 
-			request.setAttribute("userprofilepic", "test");
+			request.setAttribute("profilepic", "test");
 			request.setAttribute("username", dbusername);
+			request.setAttribute("name", dbname);
+			request.setAttribute("status", dbstatus);
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
         
         
