@@ -42,7 +42,7 @@
 <p>Name: {user.firstname} {user.lastname}</p>
 <p>Status: {user.status}</p>	
 
-<form align="right" action="phoebe.is.inf.uni-due.de:9018/babble_create"> 
+<form align="right" action="./babble_create"> 
     <input type="submit" value="New Babble"/>
 </form>
 
