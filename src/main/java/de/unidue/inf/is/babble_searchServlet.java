@@ -20,4 +20,4 @@ public final class babble_searchServlet extends HttpServlet {
         request.getRequestDispatcher("babble_search.ftl").forward(request, response);
     }
 }
-//ass
+

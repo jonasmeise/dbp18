@@ -18,7 +18,7 @@
 <header>
 <div id="outer">
 <div class="inner">
-<form action="theia.is.inf.uni-due.de:9018/babble_search"> 
+<form action="phoebe.is.inf.uni-due.de:9018/babble_search"> 
     <input type="submit" value="BubbleSearch" />
 </form>
 </div>
@@ -42,7 +42,7 @@
 <p>Name: {user.firstname} {user.lastname}</p>
 <p>Status: {user.status}</p>
 
-<form align="right" action="theia.is.inf.uni-due.de:9018/babble_create"> 
+<form align="right" action="phoebe.is.inf.uni-due.de:9018/babble_create"> 
     <input type="submit" value="New Babble"/>
 </form>
 
