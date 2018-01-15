@@ -25,10 +25,9 @@ public final class user_profileServlet extends HttpServlet {
     	
     	Connection myConnection = null;
     	ResultSet resultSet = null;
-    	String out ="";
-		String dbusername = "";
-		String dbname = "";		
-		String dbstatus = "";
+		String dbUserName = "";
+		String dbName = "";		
+		String dbStatus = "";
 
     	
     	DBUtil myDB = null;
@@ -39,20 +38,24 @@ public final class user_profileServlet extends HttpServlet {
 			resultSet = myPrepStatement.executeQuery();
 			
 			
-			StringBuffer outb = new StringBuffer();
+			StringBuffer outUserName = new StringBuffer();
+			StringBuffer outName = new StringBuffer();
+			StringBuffer outStatus = new StringBuffer();
 		while (resultSet.next()){
-				String temp = resultSet.getString("username");
-				outb.append(temp).append("<br/>");
+				String tempUserName = resultSet.getString("username");
+				outUserName.append(tempUserName).append("<br/>");
+				String tempName = resultSet.getString("name");
+				outUserName.append(tempName).append("<br/>");
+				String tempStatus = resultSet.getString("status");
+				outUserName.append(tempStatus).append("<br/>");
+				
 		}
 			 
 		
-			out = outb.toString();
-			dbusername = out;
-			dbname="fuckm";
-			dbstatus="test2";
-			System.out.println(dbusername);
-			System.out.println(dbname);
-			System.out.println(dbstatus);
+			dbUserName = outUserName.toString();
+			dbName= outName.toString();
+			dbStatus= outStatus.toString();
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -69,10 +72,10 @@ public final class user_profileServlet extends HttpServlet {
 			System.out.println("ResultSet ist leer:" + resultSet==null);
 
 
-			request.setAttribute("profilepic", "test");
-			request.setAttribute("username", out);
-			request.setAttribute("name", dbname);
-			request.setAttribute("status", dbstatus);
+			request.setAttribute("profilepic", "http://gify.com Kappa");
+			request.setAttribute("username", dbUserName);
+			request.setAttribute("name", dbName);
+			request.setAttribute("status", dbStatus);
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
         
         
