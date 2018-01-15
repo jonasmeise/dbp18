@@ -77,7 +77,8 @@ public final class user_profileServlet extends HttpServlet {
 			request.setAttribute("name", dbName);
 			request.setAttribute("status", dbStatus);
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
-        
-        
+       
+      
     }
+    
 }

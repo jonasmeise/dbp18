@@ -18,20 +18,21 @@
 <header>
 <div id="outer">
 <div class="inner">
-<form action="phoebe.is.inf.uni-due.de:9018/babble_search"> 
+<form action="./babble_search"> 
     <input type="submit" value="BubbleSearch" />
 </form>
 </div>
 
 <div class="inner">
 <form>
-    <button type="submit"/>Follow/Unfollow
+    <button type="submit" name="followButton"/>Follow/Unfollow
 </form>
 </div>
 
 <div class="inner">
 <form>
-    <button type="submit"/>Block/Unblock
+    <button type="submit name= "blockedButton"/>Block/Unblock
+    
 </form>
 </div>
 </div>
@@ -41,6 +42,8 @@
 <p>Benuter:  ${username} </p>
 <p>Name: ${name} </p>
 <p>Status: ${status}</p>	
+
+
 
 <form align="right" action="./babble_create"> 
     <input type="submit" value="New Babble"/>
