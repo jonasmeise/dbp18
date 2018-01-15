@@ -34,6 +34,10 @@ public final class user_profileServlet extends HttpServlet {
 			myPrepStatement.setString(2, "BabbleUser");
 			resultSet = myPrepStatement.executeQuery();
 			
+	    	while(resultSet.next()) {
+	    		request.setAttribute("username", resultSet.getString("username"));
+	    	}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,7 +52,6 @@ public final class user_profileServlet extends HttpServlet {
     	
     	
     	
-    	request.setAttribute("username", resultSet);
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
         
         
