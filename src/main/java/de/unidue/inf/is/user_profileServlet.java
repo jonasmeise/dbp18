@@ -25,7 +25,10 @@ public final class user_profileServlet extends HttpServlet {
     	
     	Connection myConnection = null;
     	ResultSet resultSet = null;
-		String out = "";
+		String dbusername = "";
+		String dbname = "";		
+		String dbstatus = "";
+
     	
     	DBUtil myDB = null;
     	try {
@@ -35,18 +38,17 @@ public final class user_profileServlet extends HttpServlet {
 			resultSet = myPrepStatement.executeQuery();
 			
 			
-		//	StringBuffer outb = new StringBuffer();
-			//while (resultSet.next()) {
-				System.out.println(resultSet.getString(1));
-				System.out.println(resultSet.getString(2));
-				System.out.println(resultSet.getString(3));
-				System.out.println(resultSet.getString(4));
-
-			//String name = resultSet.getMetaData();
-			//	outb.append(name).append("<br>");
-			//}
+			StringBuffer outb = new StringBuffer();
+			
+			 dbusername = resultSet.getString("username");
+			 dbname = resultSet.getString("username");
+			 dbstatus = resultSet.getString("username");
+			
+			
 		//	out = outb.toString();
-			//System.out.println(out);
+			System.out.println(dbusername);
+			System.out.println(dbname);
+			System.out.println(dbstatus);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -63,8 +65,8 @@ public final class user_profileServlet extends HttpServlet {
 			System.out.println(resultSet==null);
 
 
-	//		request.setAttribute("userprofilepic", "test");
-	//		request.setAttribute("username", out);
+			request.setAttribute("userprofilepic", "test");
+			request.setAttribute("username", dbusername);
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
         
         
