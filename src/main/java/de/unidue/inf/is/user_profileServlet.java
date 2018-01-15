@@ -30,8 +30,11 @@ public final class user_profileServlet extends HttpServlet {
     	try {
 			myConnection = myDB.getConnection("babble");
 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT ? FROM BabbleUser");
+			System.out.println(myConnection.getMetaData());
 			myPrepStatement.setString(1, "username");
 			resultSet = myPrepStatement.executeQuery();
+			
+			request.setAttribute("username", resultSet.getString(1));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -47,7 +50,7 @@ public final class user_profileServlet extends HttpServlet {
     	
 			System.out.println(resultSet==null);
 
-			request.setAttribute("username", "test");
+
 
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
         
