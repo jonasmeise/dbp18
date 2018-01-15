@@ -46,13 +46,17 @@ public final class user_profileServlet extends HttpServlet {
 			}
 		}
     	
-    	
-		try {
-			request.setAttribute("username", resultSet.getString("username"));
+    	String abc;
+    	try {
+			abc = resultSet.getString(0);
+			System.out.println(abc);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	
+			request.setAttribute("username", abc);
+
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
         
         
