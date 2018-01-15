@@ -72,7 +72,7 @@ public final class user_profileServlet extends HttpServlet {
 			System.out.println("ResultSet ist leer:" + resultSet==null);
 
 
-			request.setAttribute("profilepic", "http://gify.com Kappa");
+			request.setAttribute("profilepic", "http://gify.com Keepo");
 			request.setAttribute("username", dbUserName);
 			request.setAttribute("name", dbName);
 			request.setAttribute("status", dbStatus);
