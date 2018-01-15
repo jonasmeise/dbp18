@@ -39,14 +39,16 @@ public final class user_profileServlet extends HttpServlet {
 			resultSet = myPrepStatement.executeQuery();
 			
 			
-			StringBuffer outb = new StringBuffer();
-			while (resultSet.next()){
+			//StringBuffer outb = new StringBuffer();
+			//while (resultSet.next()){
 				String temp = resultSet.getString("username");
-				outb.append(temp).append("<br/>");
-			}
+				//outb.append(temp).append("<br/>");
+		//	}
 			 
 		
-			out = outb.toString();
+			dbusername = temp;
+			dbname=temp.toString();
+			dbstatus="test2";
 			System.out.println(dbusername);
 			System.out.println(dbname);
 			System.out.println(dbstatus);
