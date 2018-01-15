@@ -38,7 +38,7 @@
 </header>
 
 <p>{user.profilepic}</p>
-<p>Benuter:  {user.username} </p>
+<p>Benuter:  "$username" </p>
 <p>Name: {user.firstname} {user.lastname}</p>
 <p>Status: {user.status}</p>
 

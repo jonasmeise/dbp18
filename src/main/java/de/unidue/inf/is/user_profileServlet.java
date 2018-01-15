@@ -19,5 +19,7 @@ public final class user_profileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
                     throws ServletException, IOException {
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
+        
+        request.setAttribute("username", "yo");
     }
 }
