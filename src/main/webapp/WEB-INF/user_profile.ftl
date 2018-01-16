@@ -56,8 +56,9 @@
 function block() {
     var blocked;
     if (${userID}.equals(FooBar) {
+    blocked ="You are not blocked.";
     } else {
-        greeting = "You are blocked.";
+        blocked = "You are blocked.";
     }
     document.getElementById(blockedString).innerHTML = blocked;
 }
