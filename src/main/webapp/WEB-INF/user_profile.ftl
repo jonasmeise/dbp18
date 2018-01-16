@@ -61,8 +61,8 @@
         <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Rebabbles</th> <th>Likes</th> <th>Dislikes</th>
     </tr>
     <tr>
-        <td><form align="left" action="./user_profile"> 
-        <#list babblelist as babble>
+    <#list babblelist as babble>
+      <td><form align="left" action="./user_profile">   
     <input type="submit" name="profileLink" value="${babble.creator}"/>
 </form></td> 
 <td><form align="left" action="./babble_details"> 
