@@ -28,11 +28,11 @@ public final class babble_detailsServlet extends HttpServlet {
 		
     	try {
  			myConnection = myDB.getConnection("babble");	//"SELECT text, created,creator, count(rebabble.babble) AS rebabbles FROM babble JOIN likesbabble ON babble.id=likesbabble.babble JOIN rebabble ON babble.id=rebabble.babble WHERE babble.id = ? ");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text, created,creator FROM babble WHERE id = ? ");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT b1.text, b1.created,b1.creator, count(r1.babble) AS rebabbles FROM babble b1 , rebabble r1 WHERE id = ? and b1.id=r1.babble");
  			myPrepStatement.setString(1, "3");	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
- 			//StringBuffer outRebabbles = new StringBuffer();
+ 			StringBuffer outRebabbles = new StringBuffer();
  			StringBuffer outCreator = new StringBuffer();
  			StringBuffer outCreated = new StringBuffer();
  			StringBuffer outText = new StringBuffer();
@@ -44,8 +44,8 @@ public final class babble_detailsServlet extends HttpServlet {
  				outCreated.append(tempCreated);
  				String tempText = resultSet.getString("text");
  				outText.append(tempText);
- 				//String tempRebabbles = resultSet.getString("rebabbles");
- 				//outText.append(tempRebabbles);
+ 				String tempRebabbles = resultSet.getString("rebabbles");
+ 				outText.append(tempRebabbles);
 
  				
  		}
@@ -53,7 +53,7 @@ public final class babble_detailsServlet extends HttpServlet {
  			request.setAttribute("creator",outCreator.toString());
  			request.setAttribute("text",outText.toString());
  			request.setAttribute("created",outCreated.toString());
- 		//	request.setAttribute("rebabbles",outRebabbles.toString());
+ 			request.setAttribute("rebabbles",outRebabbles.toString());
 
  			
  			
