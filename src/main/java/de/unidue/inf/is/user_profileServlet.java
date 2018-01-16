@@ -148,7 +148,7 @@ public final class user_profileServlet extends HttpServlet {
     	 
     	 try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT id,creator,created,text FROM babble WHERE creator = ? ORDER BY id DESC");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT creator,created,text FROM babble WHERE creator = ? ORDER BY id DESC");
  			myPrepStatement.setString(1, userID);
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
