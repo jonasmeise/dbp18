@@ -38,11 +38,11 @@ public final class babble_detailsServlet extends HttpServlet {
  			StringBuffer outText = new StringBuffer();
 
  		while (resultSet.next()){	
- 				String tempCreator = resultSet.getString("creator");
+ 				String tempCreator = resultSet.getString("babble.creator");
  				outCreator.append(tempCreator);
- 				String tempCreated = resultSet.getString("created");
+ 				String tempCreated = resultSet.getString("babble.created");
  				outCreated.append(tempCreated);
- 				String tempText = resultSet.getString("text");
+ 				String tempText = resultSet.getString("babble.text");
  				outText.append(tempText);
  				String tempRebabbles = resultSet.getString("rebabbles");
  				outText.append(tempRebabbles);
