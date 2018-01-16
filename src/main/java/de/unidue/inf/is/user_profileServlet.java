@@ -77,7 +77,7 @@ public final class user_profileServlet extends HttpServlet {
 			myPrepStatement.setString(2, initialUserID);
 			ResultSet resultSet = myPrepStatement.executeQuery();
 			
-			if(resultSet==null){
+			if(resultSet==null){//TODO das hier ist der fehler wahrscheinlich
 				request.setAttribute("block","You are not blocked!");
 		    	request.setAttribute("reason","you are cool");
 			}else{
@@ -109,7 +109,7 @@ public final class user_profileServlet extends HttpServlet {
 					myPrepStatement.setString(1, initialUserID);
 					myPrepStatement.setString(2, userID);
 					ResultSet resultSet = myPrepStatement.executeQuery();
-					if(resultSet==null){
+					if(resultSet==null){ //TODO das hier ist der fehler wahrscheinlich
 						request.setAttribute("follow","You dont follow this dude");
 					}else{
 						request.setAttribute("follow","You follow this dude!");
@@ -164,6 +164,7 @@ public final class user_profileServlet extends HttpServlet {
                     IOException {
     	
        userID = request.getParameter("profileLink");
+       doGet(request, response);
        
         
        

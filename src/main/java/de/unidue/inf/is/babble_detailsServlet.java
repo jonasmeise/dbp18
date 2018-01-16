@@ -32,33 +32,13 @@ public final class babble_detailsServlet extends HttpServlet {
  			myPrepStatement.setString(1, "3");	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
- 			//StringBuffer outRebabbles = new StringBuffer();
- 			//StringBuffer outCreator = new StringBuffer();
- 			//StringBuffer outCreated = new StringBuffer();
- 			//StringBuffer outText = new StringBuffer();
-
  		while (resultSet.next()){	
  			request.setAttribute("text",resultSet.getString("text").toString());
  			request.setAttribute("created",resultSet.getString("created").toString());
  			request.setAttribute("creator",resultSet.getString("creator").toString());
- 			/*
- 				String tempCreator = resultSet.getString("creator");
- 				outCreator.append(tempCreator);
- 				String tempCreated = resultSet.getString("created");
- 				outCreated.append(tempCreated);
- 				String tempText = resultSet.getString("text");
- 				outText.append(tempText);
- 				String tempRebabbles = resultSet.getString("rebabbles");
- 				outText.append(tempRebabbles);
-*/
- 				
+		
  		}
- 		/*
- 			request.setAttribute("creator",outCreator.toString());
- 			request.setAttribute("text",outText.toString());
- 			request.setAttribute("created",outCreated.toString());
- 			request.setAttribute("rebabbles",outRebabbles.toString());
-*/
+ 
  			
  			
  			
@@ -76,4 +56,16 @@ public final class babble_detailsServlet extends HttpServlet {
     	
         request.getRequestDispatcher("babble_details.ftl").forward(request, response);
     }
+    
+   /* @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+                    IOException {
+    	
+       request.getParameter("babbleidLink");
+       doGet(request, response);
+       
+  
+        request.getRequestDispatcher("user_profile.ftl").forward(request, response);
+    }
+    */
 }
