@@ -3,13 +3,8 @@
 <body>
 
 
-<form align="left" action="./user_profile"> 
-    <input type="submit" value="${creator}"/>
-</form>
-<form align="left" action="./babble_details"> 
-    <input type="submit" value="${text}"/>
-</form>
-<p> Rebabbles: ${rebabbles} </p>
+<p> ${creator} </p>
+<p> ${text} </p>
 <p> ${created} </p>
 
 

@@ -34,11 +34,11 @@ public final class user_profileServlet extends HttpServlet {
     	
     	try {
 			myConnection = myDB.getConnection("babble");
-			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT username,name,status FROM BabbleUser WHERE username = ?");
+			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT foto,username,name,status FROM BabbleUser WHERE username = ?");
 			myPrepStatement.setString(1, userID);
 			ResultSet resultSet = myPrepStatement.executeQuery();
 			
-			
+			StringBuffer outFoto = new StringBuffer();
 			StringBuffer outUserName = new StringBuffer();
 			StringBuffer outName = new StringBuffer();
 			StringBuffer outStatus = new StringBuffer();
@@ -49,8 +49,11 @@ public final class user_profileServlet extends HttpServlet {
 				outName.append(tempName);
 				String tempStatus = resultSet.getString("status");
 				outStatus.append(tempStatus);
+				String tempFoto = resultSet.getString("foto");
+				outFoto.append(tempFoto);
 		}
 
+			request.setAttribute("foto", outFoto.toString() );
 			request.setAttribute("username", outUserName.toString());
 			request.setAttribute("name", outName.toString());
 			request.setAttribute("status", outStatus.toString());
@@ -182,7 +185,7 @@ public final class user_profileServlet extends HttpServlet {
     	 
     	 
 
-			request.setAttribute("profilepic", "http://gify.com Keepo");
+			
 			request.setAttribute("userID", userID);
 			
 			

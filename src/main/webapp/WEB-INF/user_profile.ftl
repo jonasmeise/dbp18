@@ -39,7 +39,7 @@
 </div>
 </header>
 
-<p>${profilepic}</p>
+<p>${foto}</p>
 <p>Benuter:  ${username} </p>
 <p>Name: ${name} </p>
 <p>Status: ${status}</p>	
