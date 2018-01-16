@@ -61,18 +61,15 @@
         <th>Creator</th>  <th>Text</th>
     </tr>
     <tr>
-        <td>${creator}</td> <td>${text}</td>
+        <td><form align="left" action="./user_profile"> 
+    <input type="submit" value="${creator}"/>
+</form></td> 
+<td><form align="left" action="./babble_details"> 
+    <input type="submit" value="${text}"/>
+</form></td> 
+<td>${created}</td>
     </tr>
   </table>
-
-
-<form align="left" action="./user_profile"> 
-    <input type="submit" value="${creator}"/>
-</form>
-<form align="left" action="./babble_details"> 
-    <input type="submit" value="${text}"/>
-</form>
-<p> ${created} </p>
 
 </br>
 </body>
