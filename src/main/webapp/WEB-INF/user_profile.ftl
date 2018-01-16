@@ -56,6 +56,15 @@
 </br>
 <p> Babbles: </p>
 
+<table class="datatable">
+    <tr>
+        <th>Creator</th>  <th>Text</th>
+    </tr>
+    <tr>
+        <td>${creator}</td> <td>${text}</td>
+    </tr>
+  </table>
+
 
 <form align="left" action="./user_profile"> 
     <input type="submit" value="${creator}"/>
