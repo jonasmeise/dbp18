@@ -18,3 +18,5 @@ man auf die jeweiligen Babbles von denen klickt. (man kann nicht nach usern such
 neue userID des benutzers angeben/unterscheiden ob unsereID oder neuer user
 
 ggf titel user:profile ${userID} im namen wegmachen ist unnötig
+
+die actual buttons mit insert into blocks und follows user_profile

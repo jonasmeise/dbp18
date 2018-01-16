@@ -50,7 +50,7 @@
     <input type="submit" value="New Babble"/>
 </form>
 
-<p> ${block} </p>
+<p> ${block} , because ${reason} </p>
 <p> ${follow} </p>
 
 
