@@ -30,9 +30,9 @@
 </div>
 
 <div class="inner">
-
-<button onclick="block()">Block/Unblocked</button>
-
+<form>
+<button type="submit" name="blockButton"/>Block/Unblocked
+</form>
 
 
 </div>
@@ -50,19 +50,9 @@
     <input type="submit" value="New Babble"/>
 </form>
 
-<p id=blockedString></p>
+<p> ${block} </p>
 
-<script>
-function block() {
-    var blocked;
-    if (${userID}.equals(FooBar) {
-    blocked ="You are not blocked.";
-    } else {
-        blocked = "You are blocked.";
-    }
-    document.getElementById(blockedString).innerHTML = blocked;
-}
-</script>
+
 
 </body>
 </html>

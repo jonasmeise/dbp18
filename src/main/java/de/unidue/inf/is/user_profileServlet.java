@@ -30,6 +30,7 @@ public final class user_profileServlet extends HttpServlet {
 		String dbUserName = "";
 		String dbName = "";		
 		String dbStatus = "";
+		Boolean blocked;
 
     	
     	DBUtil myDB = null;
@@ -78,7 +79,13 @@ public final class user_profileServlet extends HttpServlet {
 			request.setAttribute("username", dbUserName);
 			request.setAttribute("name", dbName);
 			request.setAttribute("status", dbStatus);
-			request.setAttribute("userID", "teset");
+			
+			    if (userID.equals("FooBar")) {
+			    	request.setAttribute("block","You are not blocked");
+			    } else {
+			    	request.setAttribute("block","You are blocked idiot");
+			    }
+			    
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
        
       
