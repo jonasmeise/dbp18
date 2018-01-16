@@ -2,7 +2,7 @@
 <head><title>babble_details</title>
 <body>
 
-<p> ${id} </p>
+
 <form align="left" action="./user_profile"> 
     <input type="submit" value="${creator}"/>
 </form>
