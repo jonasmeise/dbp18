@@ -56,7 +56,7 @@
 </br>
 <p> Babbles: </p>
 
-<p> ${id} </p>
+
 <form align="left" action="./user_profile"> 
     <input type="submit" value="${creator}"/>
 </form>
