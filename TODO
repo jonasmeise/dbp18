@@ -4,7 +4,7 @@ ID: profile_view ist die selbe Seite wie user_profile??
 user_profile:
 Button funktion follow und block bei user_profile
 Bildpfad angeben aus DB
-irgendwie den user der seite auslesen und dann die ganzen sachen rausnehmen von ihm
+
 
 
 ...
@@ -12,3 +12,7 @@ pretty much alle funktionalität
 
 //falls unten alles nicht mehr klappt liegt es wahrscheinlich daran, 
 dass ich den Konstruktor von User erweitert habe
+
+Idee: bei user_profile mit userID initiallisiert mit FooBar (wir) und dann kommt man nur auf die anderen Profile, indem 
+man auf die jeweiligen Babbles von denen klickt. (man kann nicht nach usern suchen). beim erneuten aufrufen immer 
+neue userID des benutzers angeben/unterscheiden ob unsereID oder neuer user

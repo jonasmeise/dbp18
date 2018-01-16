@@ -18,7 +18,9 @@ import java.sql.SQLException;
 public final class user_profileServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-
+    private static final String initialUserID ="FooBar";
+    private String userID="FooBar";
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
                     throws ServletException, IOException {
@@ -34,7 +36,7 @@ public final class user_profileServlet extends HttpServlet {
     	try {
 			myConnection = myDB.getConnection("babble");
 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT username,name,status FROM BabbleUser WHERE username = ?");
-			myPrepStatement.setString(1, "FooBar");
+			myPrepStatement.setString(1, userID);
 			resultSet = myPrepStatement.executeQuery();
 			
 			
@@ -69,13 +71,14 @@ public final class user_profileServlet extends HttpServlet {
 			}
 		}
     	
-			System.out.println("ResultSet ist leer:" + resultSet==null);
+	
 
 
 			request.setAttribute("profilepic", "http://gify.com Keepo");
 			request.setAttribute("username", dbUserName);
 			request.setAttribute("name", dbName);
 			request.setAttribute("status", dbStatus);
+			request.setAttribute("userID", "teset");
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
        
       

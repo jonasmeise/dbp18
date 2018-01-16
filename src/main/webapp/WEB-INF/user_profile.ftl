@@ -30,10 +30,11 @@
 </div>
 
 <div class="inner">
-<form>
-    <button type="submit name= "blockedButton"/>Block/Unblock
-    
-</form>
+
+<button onclick="block()">Block/Unblocked</button>
+
+
+
 </div>
 </div>
 </header>
@@ -48,6 +49,19 @@
 <form align="right" action="./babble_create"> 
     <input type="submit" value="New Babble"/>
 </form>
+
+<p id=blockedString></p>
+
+<script>
+function block() {
+    var blocked;
+    if (${userID}.equals(FooBar) {
+    } else {
+        greeting = "You are blocked.";
+    }
+    document.getElementById(blockedString).innerHTML = blocked;
+}
+</script>
 
 </body>
 </html>
