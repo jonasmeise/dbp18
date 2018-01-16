@@ -152,7 +152,7 @@ public final class user_profileServlet extends HttpServlet {
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
  			
- 			StringBuffer outCreator = new StringBuffer();
+ 			//StringBuffer outCreator = new StringBuffer();
  			StringBuffer outCreated = new StringBuffer();
  			StringBuffer outText = new StringBuffer();
  			
@@ -160,13 +160,13 @@ public final class user_profileServlet extends HttpServlet {
  		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten und alle like/retweet tabellen joinen einfach wenn mehrere babbles kommen , ein problem wird nur eventuell auch das in der gui als ganz viele verschiedene babbels auszugeben, im moment nur mit 1 wie gesagt
  				//babblelist.add(new Babble(resultSet.getString("creator"),))
  			
- 				String tempCreator = resultSet.getString("creator");
- 				outCreator.append(tempCreator);
+ 			//	String tempCreator = resultSet.getString("creator");
+ 			//	outCreator.append(tempCreator);
  				String tempCreated = resultSet.getString("created");
  				outCreated.append(tempCreated);
  				String tempText = resultSet.getString("text");
  				outText.append(tempText);
- 				request.setAttribute("creator",tempCreated.toString());
+ 				request.setAttribute("creator",resultSet.getString("creator").toString());
  
  				
  		}
