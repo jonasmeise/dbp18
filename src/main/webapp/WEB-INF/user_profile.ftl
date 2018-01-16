@@ -62,13 +62,17 @@
     </tr>
     <tr>
         <td><form align="left" action="./user_profile"> 
-    <input type="submit" value="${creator}"/>
+        <#list babblelist as babble>
+    <input type="submit" value="${babble.creator}"/>
 </form></td> 
 <td><form align="left" action="./babble_details"> 
-    <input type="submit" value="${text}"/>
+    <input type="submit" value="${babble.text}"/>
 </form></td> 
-<td>${created}</td>
+<td>${babble.created}</td>
     </tr>
+    
+    
+    </#list>
   </table>
 
 </br>

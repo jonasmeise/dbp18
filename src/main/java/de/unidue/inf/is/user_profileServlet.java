@@ -44,7 +44,7 @@ public final class user_profileServlet extends HttpServlet {
 
 		while (resultSet.next()){
 				
-				request.setAttribute("foto", "http");
+				request.setAttribute("foto", "http"); // TODO wenn leer ist wie in beispieltabelle kommt fehler
 				request.setAttribute("username", resultSet.getString("username"));
 				request.setAttribute("name", resultSet.getString("name"));
 				request.setAttribute("status", resultSet.getString("status"));
@@ -62,8 +62,8 @@ public final class user_profileServlet extends HttpServlet {
 			}
 		}
     	
-    	//SQL-Abfrage für blocked //TODO die $reason und $block teile außerhalb der try/catch?
-    	//klappt noch nicht ganz? kA wieso tho, bei follow sollte es auch klappen und ist genauso
+    	//SQL-Abfrage für blocked 
+    	
     	 
     	if (userID.equals("FooBar")) {
 	    	request.setAttribute("block","You are not blocked");
@@ -76,17 +76,12 @@ public final class user_profileServlet extends HttpServlet {
 			myPrepStatement.setString(2, initialUserID);
 			ResultSet resultSet = myPrepStatement.executeQuery();
 			
-			StringBuffer outReason = new StringBuffer();
-			while (resultSet.next()){
-					String tempReason = resultSet.getString("reason");
-					outReason.append(tempReason);
-			}
 			if(resultSet==null){
 				request.setAttribute("block","You are not blocked!");
 		    	request.setAttribute("reason","you are cool");
 			}else{
 				request.setAttribute("block","You are blocked");
-		    	request.setAttribute("reason", outReason.toString());
+		    	request.setAttribute("reason", resultSet.getString("reason"));
 		    }
     	} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -141,20 +136,14 @@ public final class user_profileServlet extends HttpServlet {
  			
  	
  		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten und alle like/retweet tabellen joinen einfach wenn mehrere babbles kommen , ein problem wird nur eventuell auch das in der gui als ganz viele verschiedene babbels auszugeben, im moment nur mit 1 wie gesagt
- 				//babblelist.add(new Babble(resultSet.getString("creator"),))
+ 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0));
  	
- 				request.setAttribute("creator",resultSet.getString("creator").toString());
- 				request.setAttribute("text",resultSet.getString("text").toString());
- 				request.setAttribute("created",resultSet.getString("created").toString());
- 
+ 				//request.setAttribute("creator",resultSet.getString("creator").toString());
+ 				//request.setAttribute("text",resultSet.getString("text").toString());
+ 				//request.setAttribute("created",resultSet.getString("created").toString());
+ 				request.setAttribute("babblelist", babblelist);
  				
  		}
-
- 			
- 			//request.setAttribute("babblelist", babblelist);
- 			
- 			
- 			
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
@@ -166,20 +155,6 @@ public final class user_profileServlet extends HttpServlet {
  				e.printStackTrace();
  			}
  		}
-    	 
-    	 
-    	 
-
-			
-			request.setAttribute("userID", userID);
-			
-			
-			
-			
-			
-			    
-			    
-			   
 			    
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
        
