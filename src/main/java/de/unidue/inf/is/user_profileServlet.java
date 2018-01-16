@@ -81,10 +81,23 @@ public final class user_profileServlet extends HttpServlet {
 			request.setAttribute("status", dbStatus);
 			request.setAttribute("userID", userID);
 			
+			//try {
+			//	myConnection = myDB.getConnection("babble");
+			//	PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT username,name,status FROM BabbleUser WHERE username = ?");
+			////	myPrepStatement.setString(1, userID);
+			//	resultSet = myPrepStatement.executeQuery();
+			
 			    if (userID.equals("FooBar")) {
 			    	request.setAttribute("block","You are not blocked");
-			    } else {
+			    } else 
+			    {
 			    	request.setAttribute("block","You are blocked idiot");
+			    }
+			    
+			    if (userID.equals("FooBar")) {
+			    	request.setAttribute("follow","You dont follow this dude");
+			    } else {
+			    	request.setAttribute("follow","You followed this dude");
 			    }
 			    
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);

@@ -16,3 +16,5 @@ dass ich den Konstruktor von User erweitert habe
 Idee: bei user_profile mit userID initiallisiert mit FooBar (wir) und dann kommt man nur auf die anderen Profile, indem 
 man auf die jeweiligen Babbles von denen klickt. (man kann nicht nach usern suchen). beim erneuten aufrufen immer 
 neue userID des benutzers angeben/unterscheiden ob unsereID oder neuer user
+
+ggf titel user:profile ${userID} im namen wegmachen ist unnötig
