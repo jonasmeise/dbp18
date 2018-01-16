@@ -62,7 +62,7 @@
     </tr>
     <tr>
     <#list babblelist as babble>
-      <td><form align="left" action="./user_profile">   
+      <td><form align="left" action="./user_profile" method="post">   
     <input type="submit" name="profileLink" value="${babble.creator}"/>
 </form></td> 
 <td><form align="left" action="./babble_details"> 

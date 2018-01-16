@@ -162,9 +162,9 @@ public final class user_profileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
                     IOException {
-    	System.out.println(userID);
-        userID = request.getParameter("profileLink");
-        System.out.println(userID);
+    	
+       userID = request.getParameter("profileLink");
+       
         
        
         
