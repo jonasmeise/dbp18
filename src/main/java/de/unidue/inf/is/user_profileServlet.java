@@ -148,7 +148,7 @@ public final class user_profileServlet extends HttpServlet {
     	 
     	 try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE creator = ? ORDER BY id DESC");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT id,text,created,creator FROM babble WHERE creator = ? ORDER BY id DESC");
  			myPrepStatement.setString(1, userID);
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
@@ -156,6 +156,7 @@ public final class user_profileServlet extends HttpServlet {
  			StringBuffer outCreator = new StringBuffer();
  			StringBuffer outCreated = new StringBuffer();
  			StringBuffer outText = new StringBuffer();
+ 			StringBuffer outID = new StringBuffer();
  		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten wenn mehrere babbles kommen von einem user
  				String tempCreator = resultSet.getString("creator");
  				outCreator.append(tempCreator);
@@ -163,16 +164,16 @@ public final class user_profileServlet extends HttpServlet {
  				outCreated.append(tempCreated);
  				String tempText = resultSet.getString("text");
  				outText.append(tempText);
+ 				String tempID = resultSet.getString("id");
+ 				outID.append(tempID);
  				
  		}
- 			 
- 		System.out.println(outCreator.toString());
- 		System.out.println(outCreator.toString());
- 		System.out.println(outCreator.toString());
  		
  			dbCreator = outCreator.toString();
  			dbText = outText.toString();
  			dbCreated = outCreated.toString();
+ 			request.setAttribute("id", outID.toString());
+ 			
  			
  			
  		} catch (SQLException e) {

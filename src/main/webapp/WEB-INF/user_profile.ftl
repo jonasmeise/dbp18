@@ -54,11 +54,13 @@
 <p> ${follow} </p>
 </br>
 </br>
+<p> Babbles: </p>
 
+<p> ${id} </p>
 <form align="left" action="./user_profile"> 
     <input type="submit" value="${creator}"/>
 </form>
-<form align="left" action="./user_profile"> 
+<form align="left" action="./babble_details"> 
     <input type="submit" value="${text}"/>
 </form>
 <p> ${created} </p>
