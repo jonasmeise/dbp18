@@ -26,7 +26,7 @@ public final class user_profileServlet extends HttpServlet {
                     throws ServletException, IOException {
     	
     	Connection myConnection = null;
-    	ResultSet resultSet = null;
+    //	ResultSet resultSet = null;
 		String dbUserName = "";
 		String dbName = "";		
 		String dbStatus = "";
@@ -38,7 +38,7 @@ public final class user_profileServlet extends HttpServlet {
 			myConnection = myDB.getConnection("babble");
 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT username,name,status FROM BabbleUser WHERE username = ?");
 			myPrepStatement.setString(1, userID);
-			resultSet = myPrepStatement.executeQuery();
+			ResultSet resultSet = myPrepStatement.executeQuery();
 			
 			
 			StringBuffer outUserName = new StringBuffer();
