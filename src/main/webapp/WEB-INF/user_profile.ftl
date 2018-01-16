@@ -58,7 +58,7 @@
 
 <table class="datatable">
     <tr>
-        <th>Creator</th>  <th>Text</th>
+        <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Rebabbles</th> <th>Likes</th> <th>Dislikes</th>
     </tr>
     <tr>
         <td><form align="left" action="./user_profile"> 

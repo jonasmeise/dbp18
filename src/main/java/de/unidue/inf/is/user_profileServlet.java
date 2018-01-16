@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import de.unidue.inf.is.domain.Babble;
 import de.unidue.inf.is.domain.User;
 import de.unidue.inf.is.stores.UserStore;
 import de.unidue.inf.is.utils.DBUtil;
@@ -14,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public final class user_profileServlet extends HttpServlet {
 
@@ -27,6 +29,7 @@ public final class user_profileServlet extends HttpServlet {
     	
     	Connection myConnection = null;
 		DBUtil myDB = null;
+		ArrayList<Babble> babblelist = new ArrayList<Babble>();
 		
 		
 		
@@ -152,21 +155,27 @@ public final class user_profileServlet extends HttpServlet {
  			StringBuffer outCreator = new StringBuffer();
  			StringBuffer outCreated = new StringBuffer();
  			StringBuffer outText = new StringBuffer();
+ 			
  	
  		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten und alle like/retweet tabellen joinen einfach wenn mehrere babbles kommen , ein problem wird nur eventuell auch das in der gui als ganz viele verschiedene babbels auszugeben, im moment nur mit 1 wie gesagt
+ 				//babblelist.add(new Babble(resultSet.getString("creator"),))
+ 			
  				String tempCreator = resultSet.getString("creator");
  				outCreator.append(tempCreator);
  				String tempCreated = resultSet.getString("created");
  				outCreated.append(tempCreated);
  				String tempText = resultSet.getString("text");
  				outText.append(tempText);
+ 				request.setAttribute("creator",tempCreated.toString());
  
  				
  		}
  		
- 			request.setAttribute("creator",outCreator.toString());
+ 			//request.setAttribute("creator",outCreated.toString());
  			request.setAttribute("text",outText.toString());
  			request.setAttribute("created",outCreated.toString());
+ 			
+ 			//request.setAttribute("babblelist", babblelist);
  			
  			
  			
