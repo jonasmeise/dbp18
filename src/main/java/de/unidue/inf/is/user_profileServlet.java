@@ -160,9 +160,9 @@ public final class user_profileServlet extends HttpServlet {
  				String tempCreator = resultSet.getString("creator");
  				outCreator.append(tempCreator);
  				String tempCreated = resultSet.getString("created");
- 				outCreated.append(tempCreator);
+ 				outCreated.append(tempCreated);
  				String tempText = resultSet.getString("text");
- 				outText.append(tempCreator);
+ 				outText.append(tempText);
  				
  		}
  			 
