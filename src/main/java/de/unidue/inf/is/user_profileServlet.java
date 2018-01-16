@@ -138,11 +138,7 @@ public final class user_profileServlet extends HttpServlet {
  	
  		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten und alle like/retweet tabellen joinen einfach wenn mehrere babbles kommen , ein problem wird nur eventuell auch das in der gui als ganz viele verschiedene babbels auszugeben, im moment nur mit 1 wie gesagt
  				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0));
- 	
- 				//request.setAttribute("creator",resultSet.getString("creator").toString());
- 				//request.setAttribute("text",resultSet.getString("text").toString());
- 				//request.setAttribute("created",resultSet.getString("created").toString());
- 				System.out.println(babblelist.get(0).getCreator());
+ 				babblelist.add(new Babble("ass","guck","fuck",0,0,0));
  				request.setAttribute("babblelist", babblelist);
  				
  		}
