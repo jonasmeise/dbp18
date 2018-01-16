@@ -79,6 +79,7 @@ public final class user_profileServlet extends HttpServlet {
 			request.setAttribute("username", dbUserName);
 			request.setAttribute("name", dbName);
 			request.setAttribute("status", dbStatus);
+			request.setAttribute("userID", userID);
 			
 			    if (userID.equals("FooBar")) {
 			    	request.setAttribute("block","You are not blocked");
