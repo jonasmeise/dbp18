@@ -31,6 +31,9 @@ public final class user_profileServlet extends HttpServlet {
 		String dbStatus = "";
 		String dbReason ="";
 		DBUtil myDB = null;
+		String dbCreator="";
+		String dbCreated="";
+		String dbText="";
 		
 		
 		//SQL Abfrage für die Persönlichen Daten nach derzeitiger userID
@@ -73,7 +76,8 @@ public final class user_profileServlet extends HttpServlet {
 		}
     	
     	//SQL-Abfrage für blocked //TODO die $reason und $block teile außerhalb der try/catch?
-    	/*//klappt noch nicht ganz? kA wieso tho
+    	//klappt noch nicht ganz? kA wieso tho, bei follow sollte es auch klappen und ist genauso
+    	 
     	if (userID.equals("FooBar")) {
 	    	request.setAttribute("block","You are not blocked");
 	    	request.setAttribute("reason", "this is your page idiot");
@@ -107,8 +111,9 @@ public final class user_profileServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} 
 		}
-			*/
+		
     	
     	//SQL-Abfrage für follow
     	
@@ -138,14 +143,61 @@ public final class user_profileServlet extends HttpServlet {
 					}
 				}
 		    }
+    	 
+    	 //SQL-Abfrage für Babbles
+    	 
+    	 try {
+ 			myConnection = myDB.getConnection("babble");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT id,creator,created,text FROM babble WHERE creator = ? ORDER BY id DESC");
+ 			myPrepStatement.setString(1, userID);
+ 			ResultSet resultSet = myPrepStatement.executeQuery();
+ 			
+ 			
+ 			StringBuffer outCreator = new StringBuffer();
+ 			StringBuffer outCreated = new StringBuffer();
+ 			StringBuffer outText = new StringBuffer();
+ 		while (resultSet.next()){
+ 				String tempCreator = resultSet.getString("creator");
+ 				outCreator.append(tempCreator);
+ 				String tempCreated = resultSet.getString("created");
+ 				outCreated.append(tempCreator);
+ 				String tempText = resultSet.getString("text");
+ 				outText.append(tempCreator);
+ 				
+ 		}
+ 			 
+ 		
+ 			dbCreator = outCreator.toString();
+ 			dbText = outText.toString();
+ 			dbCreated = outCreated.toString();
+ 			
+ 			
+ 		} catch (SQLException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		} finally {
+ 			try {
+ 				myConnection.close();
+ 			} catch (SQLException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 		}
+    	 
+    	 
+    	 
 
 			request.setAttribute("profilepic", "http://gify.com Keepo");
 			request.setAttribute("username", dbUserName);
 			request.setAttribute("name", dbName);
 			request.setAttribute("status", dbStatus);
 			request.setAttribute("userID", userID);
-			request.setAttribute("block", "testblock");
-			request.setAttribute("reason", "testreason");
+			//request.setAttribute("block", "testblock");
+			//request.setAttribute("reason", "testreason");
+			request.setAttribute("creator", dbCreator);
+			request.setAttribute("created", dbCreated);
+			request.setAttribute("text", dbText);
+			
 			
 			
 			

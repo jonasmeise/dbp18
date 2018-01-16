@@ -1,6 +1,6 @@
 <html> 
 <head>
-<title>user_profile/${userID}</title> 
+<title>user_profile/</title> 
  <style type="text/css">
     #outer
 {
@@ -52,8 +52,15 @@
 
 <p> ${block} , because ${reason} </p>
 <p> ${follow} </p>
+</br>
+</br>
 
-
-
+<form align="left" action="./user_profile"> 
+    <input type="submit" value="${creator}"/>
+</form>
+<form align="left" action="./user_profile"> 
+    <input type="submit" value="${text}"/>
+</form>
+<p> ${created} </p>
 </body>
 </html>
