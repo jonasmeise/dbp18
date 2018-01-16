@@ -26,14 +26,8 @@ public final class user_profileServlet extends HttpServlet {
                     throws ServletException, IOException {
     	
     	Connection myConnection = null;
-		String dbUserName = "";
-		String dbName = "";		
-		String dbStatus = "";
-		String dbReason ="";
 		DBUtil myDB = null;
-		String dbCreator="";
-		String dbCreated="";
-		String dbText="";
+		
 		
 		
 		//SQL Abfrage für die Persönlichen Daten nach derzeitiger userID
@@ -56,11 +50,10 @@ public final class user_profileServlet extends HttpServlet {
 				String tempStatus = resultSet.getString("status");
 				outStatus.append(tempStatus);
 		}
-			 
-		
-			dbUserName = outUserName.toString();
-			dbName= outName.toString();
-			dbStatus= outStatus.toString();
+
+			request.setAttribute("username", outUserName.toString());
+			request.setAttribute("name", outName.toString());
+			request.setAttribute("status", outStatus.toString());
 			
 			
 		} catch (SQLException e) {
@@ -94,13 +87,12 @@ public final class user_profileServlet extends HttpServlet {
 					String tempReason = resultSet.getString("reason");
 					outReason.append(tempReason);
 			}
-			dbReason=outReason.toString();
 			if(resultSet==null){
 				request.setAttribute("block","You are not blocked!");
 		    	request.setAttribute("reason","you are cool");
 			}else{
 				request.setAttribute("block","You are blocked");
-		    	request.setAttribute("reason", dbReason);
+		    	request.setAttribute("reason", outReason.toString());
 		    }
     	} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -123,7 +115,7 @@ public final class user_profileServlet extends HttpServlet {
 		    } else {
 		    	try {
 					myConnection = myDB.getConnection("babble");
-					PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT  FROM follows WHERE follower = ? and followee = ?");
+					PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT follower, followee FROM follows WHERE follower = ? and followee = ?");
 					myPrepStatement.setString(1, initialUserID);
 					myPrepStatement.setString(2, userID);
 					ResultSet resultSet = myPrepStatement.executeQuery();
@@ -149,7 +141,7 @@ public final class user_profileServlet extends HttpServlet {
     	 
     	 try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT id,text,created,creator FROM babble WHERE creator = ? ORDER BY id DESC");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE creator = ? ORDER BY id DESC");
  			myPrepStatement.setString(1, userID);
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
@@ -157,23 +149,21 @@ public final class user_profileServlet extends HttpServlet {
  			StringBuffer outCreator = new StringBuffer();
  			StringBuffer outCreated = new StringBuffer();
  			StringBuffer outText = new StringBuffer();
- 			StringBuffer outID = new StringBuffer();
- 		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten wenn mehrere babbles kommen von einem user
+ 	
+ 		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten und alle like/retweet tabellen joinen einfach wenn mehrere babbles kommen , ein problem wird nur eventuell auch das in der gui als ganz viele verschiedene babbels auszugeben, im moment nur mit 1 wie gesagt
  				String tempCreator = resultSet.getString("creator");
  				outCreator.append(tempCreator);
  				String tempCreated = resultSet.getString("created");
  				outCreated.append(tempCreated);
  				String tempText = resultSet.getString("text");
  				outText.append(tempText);
- 				String tempID = resultSet.getString("id");
- 				outID.append(tempID);
+ 
  				
  		}
  		
  			request.setAttribute("creator",outCreator.toString());
  			request.setAttribute("text",outText.toString());
  			request.setAttribute("created",outCreated.toString());
- 			request.setAttribute("id", outID.toString());
  			
  			
  			
@@ -193,9 +183,6 @@ public final class user_profileServlet extends HttpServlet {
     	 
 
 			request.setAttribute("profilepic", "http://gify.com Keepo");
-			request.setAttribute("username", dbUserName);
-			request.setAttribute("name", dbName);
-			request.setAttribute("status", dbStatus);
 			request.setAttribute("userID", userID);
 			
 			

@@ -20,3 +20,6 @@ neue userID des benutzers angeben/unterscheiden ob unsereID oder neuer user
 ggf titel user:profile ${userID} im namen wegmachen ist unnötig
 
 die actual buttons mit insert into blocks und follows user_profile
+
+übergabe der nächsten userID bei links über html
+übergabe der babbleID über link über html
