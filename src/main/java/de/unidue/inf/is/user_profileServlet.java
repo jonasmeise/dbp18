@@ -41,27 +41,15 @@ public final class user_profileServlet extends HttpServlet {
 			myPrepStatement.setString(1, userID);
 			ResultSet resultSet = myPrepStatement.executeQuery();
 			
-			StringBuffer outFoto = new StringBuffer();
-			StringBuffer outUserName = new StringBuffer();
-			StringBuffer outName = new StringBuffer();
-			StringBuffer outStatus = new StringBuffer();
-		while (resultSet.next()){
-				String tempUserName = resultSet.getString("username");
-				outUserName.append(tempUserName);
-				String tempName = resultSet.getString("name");
-				outName.append(tempName);
-				String tempStatus = resultSet.getString("status");
-				outStatus.append(tempStatus);
-				String tempFoto = resultSet.getString("foto");
-				outFoto.append(tempFoto);
-		}
 
-			request.setAttribute("foto", outFoto.toString() );
-			request.setAttribute("username", outUserName.toString());
-			request.setAttribute("name", outName.toString());
-			request.setAttribute("status", outStatus.toString());
-			
-			
+		while (resultSet.next()){
+				
+				request.setAttribute("foto", resultSet.getString("foto"));
+				request.setAttribute("username", resultSet.getString("username"));
+				request.setAttribute("name", resultSet.getString("name"));
+				request.setAttribute("status", resultSet.getString("status"));
+		}
+				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -151,29 +139,17 @@ public final class user_profileServlet extends HttpServlet {
  			myPrepStatement.setString(1, userID);
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
- 			
- 			//StringBuffer outCreator = new StringBuffer();
- 			StringBuffer outCreated = new StringBuffer();
- 			StringBuffer outText = new StringBuffer();
- 			
  	
  		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten und alle like/retweet tabellen joinen einfach wenn mehrere babbles kommen , ein problem wird nur eventuell auch das in der gui als ganz viele verschiedene babbels auszugeben, im moment nur mit 1 wie gesagt
  				//babblelist.add(new Babble(resultSet.getString("creator"),))
- 			
- 			//	String tempCreator = resultSet.getString("creator");
- 			//	outCreator.append(tempCreator);
- 				String tempCreated = resultSet.getString("created");
- 				outCreated.append(tempCreated);
- 				String tempText = resultSet.getString("text");
- 				outText.append(tempText);
+ 	
  				request.setAttribute("creator",resultSet.getString("creator").toString());
+ 				request.setAttribute("text",resultSet.getString("text").toString());
+ 				request.setAttribute("created",resultSet.getString("created").toString());
  
  				
  		}
- 		
- 			//request.setAttribute("creator",outCreated.toString());
- 			request.setAttribute("text",outText.toString());
- 			request.setAttribute("created",outCreated.toString());
+
  			
  			//request.setAttribute("babblelist", babblelist);
  			

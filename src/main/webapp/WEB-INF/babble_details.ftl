@@ -5,7 +5,6 @@
 
 <p> ${creator} </p>
 <p> ${text} </p>
-<p> ${rebabbles} </p>
 <p> ${created} </p>
 
 

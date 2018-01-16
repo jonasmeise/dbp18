@@ -28,16 +28,20 @@ public final class babble_detailsServlet extends HttpServlet {
 		
     	try {
  			myConnection = myDB.getConnection("babble");	//"SELECT text, created,creator, count(rebabble.babble) AS rebabbles FROM babble JOIN likesbabble ON babble.id=likesbabble.babble JOIN rebabble ON babble.id=rebabble.babble WHERE babble.id = ? ");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text, created,creator FROM babble WHERE id = ?");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text, created, creator FROM babble WHERE id = ?");
  			myPrepStatement.setString(1, "3");	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
- 			StringBuffer outRebabbles = new StringBuffer();
- 			StringBuffer outCreator = new StringBuffer();
- 			StringBuffer outCreated = new StringBuffer();
- 			StringBuffer outText = new StringBuffer();
+ 			//StringBuffer outRebabbles = new StringBuffer();
+ 			//StringBuffer outCreator = new StringBuffer();
+ 			//StringBuffer outCreated = new StringBuffer();
+ 			//StringBuffer outText = new StringBuffer();
 
  		while (resultSet.next()){	
+ 			request.setAttribute("text",resultSet.getString("text").toString());
+ 			request.setAttribute("created",resultSet.getString("created").toString());
+ 			request.setAttribute("creator",resultSet.getString("creator").toString());
+ 			/*
  				String tempCreator = resultSet.getString("creator");
  				outCreator.append(tempCreator);
  				String tempCreated = resultSet.getString("created");
@@ -46,15 +50,15 @@ public final class babble_detailsServlet extends HttpServlet {
  				outText.append(tempText);
  				String tempRebabbles = resultSet.getString("rebabbles");
  				outText.append(tempRebabbles);
-
+*/
  				
  		}
- 		
+ 		/*
  			request.setAttribute("creator",outCreator.toString());
  			request.setAttribute("text",outText.toString());
  			request.setAttribute("created",outCreated.toString());
  			request.setAttribute("rebabbles",outRebabbles.toString());
-
+*/
  			
  			
  			
