@@ -72,7 +72,7 @@ public final class user_profileServlet extends HttpServlet {
 	    } else {
     	try {
 			myConnection = myDB.getConnection("babble");
-			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT reason FROM blocks WHERE blocker = ? and blockee = ?");
+			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT reason FROM blocks WHERE blocker = ? AND blockee = ?");
 			myPrepStatement.setString(1, userID);
 			myPrepStatement.setString(2, initialUserID);
 			ResultSet resultSet = myPrepStatement.executeQuery();
@@ -82,7 +82,7 @@ public final class user_profileServlet extends HttpServlet {
 		    	request.setAttribute("reason","you are cool");
 			}else{
 				request.setAttribute("block","You are blocked");
-		    	request.setAttribute("reason", resultSet.getString("reason"));
+		    	request.setAttribute("reason", "testreason"); //TODO funktioniert nicht wenn reason leer
 		    }
     	} catch (SQLException e) {
 			// TODO Auto-generated catch block
