@@ -163,8 +163,10 @@ public final class user_profileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
                     IOException {
 
-        String clickedProfile = request.getParameter("profileLink");
-        userID = clickedProfile;
+        userID = request.getParameter("profileLink");
+        System.out.println(userID);
+        
+       
         
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
     }
