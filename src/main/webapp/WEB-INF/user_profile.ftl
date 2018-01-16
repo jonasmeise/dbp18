@@ -63,7 +63,7 @@
     <tr>
         <td><form align="left" action="./user_profile"> 
         <#list babblelist as babble>
-    <input type="submit" value="${babble.creator}"/>
+    <input type="submit" name="profileLink" value="${babble.creator}"/>
 </form></td> 
 <td><form align="left" action="./babble_details"> 
     <input type="submit" value="${babble.text}"/>
