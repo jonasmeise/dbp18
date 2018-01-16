@@ -44,7 +44,7 @@ public final class user_profileServlet extends HttpServlet {
 
 		while (resultSet.next()){
 				
-				request.setAttribute("foto", resultSet.getString("foto"));
+				request.setAttribute("foto", "http");
 				request.setAttribute("username", resultSet.getString("username"));
 				request.setAttribute("name", resultSet.getString("name"));
 				request.setAttribute("status", resultSet.getString("status"));
