@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class user_profileServlet extends HttpServlet {
 
@@ -29,7 +30,7 @@ public final class user_profileServlet extends HttpServlet {
     	
     	Connection myConnection = null;
 		DBUtil myDB = null;
-		ArrayList<Babble> babblelist = new ArrayList<Babble>();
+		List<Babble> babblelist = new ArrayList<>();
 		
 		
 		
@@ -141,6 +142,7 @@ public final class user_profileServlet extends HttpServlet {
  				//request.setAttribute("creator",resultSet.getString("creator").toString());
  				//request.setAttribute("text",resultSet.getString("text").toString());
  				//request.setAttribute("created",resultSet.getString("created").toString());
+ 				System.out.println(babblelist.get(0).getCreator());
  				request.setAttribute("babblelist", babblelist);
  				
  		}

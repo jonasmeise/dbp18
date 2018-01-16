@@ -69,6 +69,9 @@
     <input type="submit" value="${babble.text}"/>
 </form></td> 
 <td>${babble.created}</td>
+<td>${babble.likes}</td>
+<td>${babble.dislikes}</td>
+<td>${babble.rebabbles}</td>
     </tr>
     
     
