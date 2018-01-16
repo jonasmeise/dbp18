@@ -74,7 +74,7 @@ public final class user_profileServlet extends HttpServlet {
 		}
     	
     	//SQL-Abfrage für blocked //TODO die $reason und $block teile außerhalb der try/catch?
-    	
+    	/* klappt noch nicht ganz? kA wieso tho
     	if (userID.equals("FooBar")) {
 	    	request.setAttribute("block","You are not blocked");
 	    	request.setAttribute("reason", "this is your page idiot");
@@ -109,7 +109,8 @@ public final class user_profileServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-			
+			*/
+    	
     	//SQL-Abfrage für follow
     	
     	 if (userID.equals("FooBar")) {
