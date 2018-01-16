@@ -88,6 +88,7 @@ public final class user_profileServlet extends HttpServlet {
 			myPrepStatement.setString(1, userID);
 			myPrepStatement.setString(2, initialUserID);
 			ResultSet resultSet = myPrepStatement.executeQuery();
+			
 			StringBuffer outReason = new StringBuffer();
 			while (resultSet.next()){
 					String tempReason = resultSet.getString("reason");
@@ -95,8 +96,8 @@ public final class user_profileServlet extends HttpServlet {
 			}
 			dbReason=outReason.toString();
 			if(resultSet==null){
-				request.setAttribute("block","");
-		    	request.setAttribute("reason","");
+				request.setAttribute("block","You are not blocked!");
+		    	request.setAttribute("reason","you are cool");
 			}else{
 				request.setAttribute("block","You are blocked");
 		    	request.setAttribute("reason", dbReason);
@@ -129,7 +130,7 @@ public final class user_profileServlet extends HttpServlet {
 					if(resultSet==null){
 						request.setAttribute("follow","You dont follow this dude");
 					}else{
-						request.setAttribute("block","You follow this dude!");
+						request.setAttribute("follow","You follow this dude!");
 				    }
 		    	} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -169,9 +170,9 @@ public final class user_profileServlet extends HttpServlet {
  				
  		}
  		
- 			dbCreator = outCreator.toString();
- 			dbText = outText.toString();
- 			dbCreated = outCreated.toString();
+ 			request.setAttribute("creator",outCreator.toString());
+ 			request.setAttribute("text",outText.toString());
+ 			request.setAttribute("created",outCreated.toString());
  			request.setAttribute("id", outID.toString());
  			
  			
@@ -196,9 +197,7 @@ public final class user_profileServlet extends HttpServlet {
 			request.setAttribute("name", dbName);
 			request.setAttribute("status", dbStatus);
 			request.setAttribute("userID", userID);
-			request.setAttribute("creator", dbCreator);
-			request.setAttribute("created", dbCreated);
-			request.setAttribute("text", dbText);
+			
 			
 			
 			
