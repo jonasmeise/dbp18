@@ -21,7 +21,8 @@ import de.unidue.inf.is.utils.DBUtil;
 public final class babble_searchServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private String searched ="";
+    private String searched ="Ich";
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,10 +46,9 @@ public final class babble_searchServlet extends HttpServlet {
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
  	
- 		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten und alle like/retweet tabellen joinen einfach wenn mehrere babbles kommen , ein problem wird nur eventuell auch das in der gui als ganz viele verschiedene babbels auszugeben, im moment nur mit 1 wie gesagt
+ 		while (resultSet.next()){	//TODO klappt nicht
  				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,"2")); //ID klappt nicht zu übergeben
- 				babblelist.add(new Babble("dbuser","guck","fuck",0,0,0,"1"));
- 				babblelist.add(new Babble("FooBar","sdgfs","sdf",43,2,0,"2"));
+ 				request.setAttribute("babblelist", babblelist);
  		}
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
@@ -56,6 +56,7 @@ public final class babble_searchServlet extends HttpServlet {
  		} finally {
  			try {
  				myConnection.close();
+ 		
  			} catch (SQLException e) {
  				// TODO Auto-generated catch block
  				e.printStackTrace();
@@ -65,10 +66,8 @@ public final class babble_searchServlet extends HttpServlet {
      
        
         
-        if(babblelist.isEmpty()){
-        	babblelist.add(new Babble("","","",0,0,0,"")); //proxy test
-        }
-		request.setAttribute("babblelist", babblelist);
+        
+		
         request.getRequestDispatcher("babble_search.ftl").forward(request, response);
     }
 }
