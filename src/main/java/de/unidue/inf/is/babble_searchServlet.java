@@ -21,7 +21,7 @@ import de.unidue.inf.is.utils.DBUtil;
 public final class babble_searchServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private String searched ="'%Ich%'";
+    private String searched ="Ich";
     
 
     @Override
@@ -34,14 +34,14 @@ public final class babble_searchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
                     IOException {
     
-    	searched = "'%"+request.getParameter("search")+"%'";
+    	searched = request.getParameter("search");
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
 		
 		try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE ? ORDER BY id DESC");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE '%?%' ORDER BY id DESC");
  			myPrepStatement.setString(1, searched);
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			System.out.println(resultSet.toString());
