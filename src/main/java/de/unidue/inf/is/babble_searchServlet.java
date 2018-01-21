@@ -27,14 +27,42 @@ public final class babble_searchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
                     throws ServletException, IOException {
+    	Connection myConnection = null;
+		DBUtil myDB = null;
+		List<Babble> babblelist = new ArrayList<>();
+		
+		try {
+ 			myConnection = myDB.getConnection("babble");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE '%Ich%' ORDER BY id DESC");
+ 			myPrepStatement.setString(1, searched);
+ 			ResultSet resultSet = myPrepStatement.executeQuery();
+ 			System.out.println(resultSet.toString());
+ 	
+ 		while (resultSet.next()){	//TODO klappt nicht
+ 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,"2")); //ID klappt nicht zu übergeben
+ 				request.setAttribute("babblelist", babblelist); //resultSet ist immer leer
+ 		}
+ 		} catch (SQLException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		} finally {
+ 			try {
+ 				myConnection.close();
+ 		
+ 			} catch (SQLException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 		}
         request.getRequestDispatcher("babble_search.ftl").forward(request, response);
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
                     IOException {
-    
+    	System.out.println(searched);
     	searched = request.getParameter("search");
+    	System.out.println(searched);
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();

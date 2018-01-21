@@ -3,7 +3,7 @@
 <header> 
 Search:
 <form method="post" action="./babble_search">
-<input type="text" name="search" value="sampletext" maxlength="300"/>
+<input type="text" name="search" value="sample: Ich" maxlength="300"/>
 <input type="submit" value="Search">
 </form>
 
