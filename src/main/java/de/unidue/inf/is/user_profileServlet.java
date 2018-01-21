@@ -23,6 +23,7 @@ public final class user_profileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String initialUserID ="FooBar";	//unser User (wir)
     private String userID="FooBar";		//startseite (beginnend mit uns) und userID der jeweiligen Seiten
+    babble_detailsServlet bds = null;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -166,12 +167,16 @@ public final class user_profileServlet extends HttpServlet {
     
     if (request.getParameter("profileLink") != null) {
        userID = request.getParameter("profileLink");
+       doGet(request, response);
     }else if (request.getParameter("MyPage") != null) {
-    
        userID = request.getParameter("MyPage");
+       doGet(request, response);
+    }else if (request.getParameter("babbleIDLink") != null){
+    	bds.setCurrentBabbleID(request.getParameter("babbleIDLink"));
+    	bds.doGet(request, response);
     }
     
-       doGet(request, response);
+       
        
         
        

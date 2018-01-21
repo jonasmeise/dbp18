@@ -72,8 +72,8 @@
       <td><form align="left"  method="post" action="./user_profile">   
     <input type="submit" name="profileLink" value="${babble.creator}"/>
 </form></td> 
-<td><form align="left" method="post" action="./babble_details"> 
-    <input type="submit" name="babbleidLink" value="${babble.text}"/>
+<td><form align="left" action="./babble_details"> 
+    <input type="submit" name="babbleIDLink" value="${babble.id}"/> ${babble.text}
 </form></td> 
 <td>${babble.created}</td>
 <td>${babble.likes}</td>
