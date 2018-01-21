@@ -65,7 +65,9 @@ public final class babble_searchServlet extends HttpServlet {
      
        
         
-       
+        if(babblelist.isEmpty()){
+        	babblelist.add(new Babble("","","",0,0,0,"")); //proxy test
+        }
 		request.setAttribute("babblelist", babblelist);
         request.getRequestDispatcher("babble_search.ftl").forward(request, response);
     }
