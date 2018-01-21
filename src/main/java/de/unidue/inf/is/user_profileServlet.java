@@ -172,10 +172,16 @@ public final class user_profileServlet extends HttpServlet {
        userID = request.getParameter("MyPage");
        doGet(request, response);
     }else if (request.getParameter("babbleIDLink") != null){
-    	bds.setCurrentBabbleID(request.getParameter("babbleIDLink"));
+    	bds.setCurrentBabbleID(request.getParameter("babbleIDLink")); //TODO irgendwie diese scheiß id übergeben
     	//bds.doGet(request, response);
+    }else  if (request.getParameter("follow") != null){
+    	
+    	//TODO SQL für Followbutton reintun und dann wenn nicht insert into follow
+    	doGet(request, response);
+    }else if (request.getParameter("block") != null){
+    	//TODO SQL für Blockbutton reintun und dann wenn nicht insert into blocks
+    	doGet(request, response);
     }
-    
        
        
         

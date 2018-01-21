@@ -23,18 +23,17 @@
 </form>
 </div>
 
+
 <div class="inner">
-<form>
-    <button type="submit" name="followButton"/>Follow/Unfollow
+<form method="post" action="./user_profile"> 
+<input type="submit" name="follow" value="Follow/Unfollow" />
 </form>
 </div>
 
 <div class="inner">
-<form>
-<button type="submit" name="blockButton"/>Block/Unblocked
+<form method="post" action="./user_profile">
+<button type="submit" name="block" value="Block/Unblocked" />
 </form>
-
-
 </div>
 
 <div class="inner">

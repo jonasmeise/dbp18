@@ -19,5 +19,20 @@ public final class babble_searchServlet extends HttpServlet {
                     throws ServletException, IOException {
         request.getRequestDispatcher("babble_search.ftl").forward(request, response);
     }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+                    IOException {
+    
+    if (request.getParameter("search") != null) {
+    	//TODO SQL mit eingebebenen parameter alle babbles die das im namen haben
+    }
+       
+       
+        
+       
+        
+        request.getRequestDispatcher("babble_search.ftl").forward(request, response);
+    }
 }
 

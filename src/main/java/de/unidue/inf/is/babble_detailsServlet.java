@@ -67,15 +67,5 @@ public final class babble_detailsServlet extends HttpServlet {
 		this.currentBabbleID = currentBabbleID;
 	}
     
-   /* @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                    IOException {
-    	
-       request.getParameter("babbleidLink");
-       doGet(request, response);
-       
-  
-        request.getRequestDispatcher("user_profile.ftl").forward(request, response);
-    }
-    */
+ 
 }
