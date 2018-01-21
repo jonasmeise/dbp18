@@ -24,6 +24,7 @@ public final class babble_detailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
                     throws ServletException, IOException {
     	
+    	System.out.println("Insinde details" + currentBabbleID);
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		
