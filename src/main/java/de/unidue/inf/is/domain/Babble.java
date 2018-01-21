@@ -8,16 +8,16 @@ public class Babble {
 	private int likes=0;
 	private int dislikes=0;
 	private int rebabbles=0;
-	private int id=0;
+	private String id="";
 	
-public Babble(String creator, String text, String created, int likes, int dislikes, int rebabbles){
+public Babble(String creator, String text, String created, int likes, int dislikes, int rebabbles,String id){
 	this.setCreator(creator);
 	this.setText(text);
 	this.setCreated(created);
 	this.setLikes(likes);
 	this.setDislikes(dislikes);
 	this.setRebabbles(rebabbles);
-	id++;
+	this.setId(id);
 }
 
 public int getRebabbles() {
@@ -68,9 +68,12 @@ public void setCreated(String created) {
 	this.created = created;
 }
 
-public int getId() {
+public String getId() {
 	return id;
 }
 
+public void setId(String id) {
+	this.id = id;
+}
 
 }
