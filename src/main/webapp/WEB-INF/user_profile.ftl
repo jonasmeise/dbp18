@@ -38,8 +38,8 @@
 </div>
 
 <div class="inner">
-<form align="left"  method="post" action="./user_profile"> 
-<button type="submit" name="MyPage" value="FooBar"/>
+<form method="post" action="./user_profile"> 
+<input type="submit" name="MyPage" value="FooBar"/>
 </form>
 </div>
 
