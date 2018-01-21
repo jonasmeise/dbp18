@@ -34,17 +34,17 @@ public final class babble_searchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
                     IOException {
     
-    	searched = "'%"+request.getParameter("search")+"'%";
+    	searched = "'%"+request.getParameter("search")+"%'";
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
 		
 		try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE searched ORDER BY id DESC");
- 			myPrepStatement.setString(1, searched);
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE '%Ich%' ORDER BY id DESC");
+ 			//myPrepStatement.setString(1, searched);
  			ResultSet resultSet = myPrepStatement.executeQuery();
- 			
+ 			System.out.println(resultSet.toString());
  	
  		while (resultSet.next()){	//TODO klappt nicht
  				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,"2")); //ID klappt nicht zu übergeben
