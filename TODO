@@ -21,5 +21,7 @@ ggf titel user:profile ${userID} im namen wegmachen ist unnötig
 
 die actual buttons mit insert into blocks und follows user_profile
 
-übergabe der nächsten userID bei links über html
+übergabe der nächsten userID bei links über html CLEAR
 übergabe der babbleID über link über html
+
+es fuckt so unnormal ab, dass wenn man KEINE RESULTS in sql bekommt diese freemarker sofort abkacken alle
