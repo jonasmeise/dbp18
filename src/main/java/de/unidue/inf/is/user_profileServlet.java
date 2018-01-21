@@ -165,7 +165,7 @@ public final class user_profileServlet extends HttpServlet {
                     IOException {
     	
        userID = request.getParameter("profileLink");
-       userID = request.getParameter("MyPage");
+      // userID = request.getParameter("MyPage");
        doGet(request, response);
        
         
