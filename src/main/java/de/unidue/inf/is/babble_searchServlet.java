@@ -23,6 +23,7 @@ public final class babble_searchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private String searched ="Ich";
     
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -61,7 +62,7 @@ public final class babble_searchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
                     IOException {
     	System.out.println(searched);
-    	searched = request.getParameter("search");
+    	//searched = request.getParameter("search");
     	System.out.println(searched);
     	Connection myConnection = null;
 		DBUtil myDB = null;
@@ -69,8 +70,8 @@ public final class babble_searchServlet extends HttpServlet {
 		
 		try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE '%Ich%' ORDER BY id DESC");
- 			//myPrepStatement.setString(1, searched);
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE ? ORDER BY id DESC");
+ 			myPrepStatement.setString(1, "'%Ich%'");
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			System.out.println(resultSet.toString());
  	
