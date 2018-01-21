@@ -21,7 +21,7 @@ import de.unidue.inf.is.utils.DBUtil;
 public final class babble_searchServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private String searched ="Ich";
+    private String searched ="'%"+"Ich"+"%'";
     
 
     @Override
@@ -34,7 +34,7 @@ public final class babble_searchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
                     IOException {
     
-    	searched = request.getParameter("search");
+    	searched = "'%"+request.getParameter("search")+"'%";
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
@@ -48,7 +48,7 @@ public final class babble_searchServlet extends HttpServlet {
  	
  		while (resultSet.next()){	//TODO klappt nicht
  				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,"2")); //ID klappt nicht zu übergeben
- 				request.setAttribute("babblelist", babblelist);
+ 				request.setAttribute("babblelist", babblelist); //resultSet ist immer leer
  		}
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
