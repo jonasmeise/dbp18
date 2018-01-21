@@ -172,11 +172,8 @@ public final class user_profileServlet extends HttpServlet {
        userID = request.getParameter("MyPage");
        doGet(request, response);
     }else if (request.getParameter("babbleIDLink") != null){
-    	System.out.println(bds.getCurrentBabbleID());
     	bds.setCurrentBabbleID(request.getParameter("babbleIDLink"));
-    	System.out.println(bds.getCurrentBabbleID());
-    	bds.doGet(request, response);
-    	System.out.println(bds.getCurrentBabbleID());
+    	//bds.doGet(request, response);
     }
     
        
