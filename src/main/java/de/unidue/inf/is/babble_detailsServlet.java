@@ -31,7 +31,7 @@ public final class babble_detailsServlet extends HttpServlet {
     	try {
  			myConnection = myDB.getConnection("babble");	//"SELECT text, created,creator, count(rebabble.babble) AS rebabbles FROM babble JOIN likesbabble ON babble.id=likesbabble.babble JOIN rebabble ON babble.id=rebabble.babble WHERE babble.id = ? ");
  			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text, created, creator FROM babble WHERE id = ?");
- 			myPrepStatement.setString(1, currentBabbleID);	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
+ 			myPrepStatement.setString(1, request.getParameter("babbleIDLink"));	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
  		while (resultSet.next()){	

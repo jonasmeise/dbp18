@@ -45,15 +45,15 @@
 </div>
 </header>
 
-<p>${foto}</p>
-<p>Benuter:  ${username} </p>
+<p>Foto: ${foto}</p>
+<p>Benutzer:  ${username} </p>
 <p>Name: ${name} </p>
 <p>Status: ${status}</p>	
 
 
 
 <form align="right" action="./babble_create"> 
-    <input type="submit" value="New Babble"/>
+    <input type=${inputType} name="newBabbleButton" value="New Babble"/>
 </form>
 
 <p> ${block} , because ${reason} </p>
@@ -71,7 +71,7 @@
       <td><form align="left"  method="post" action="./user_profile">   
     <input type="submit" name="profileLink" value="${babble.creator}"/>
 </form></td> 
-<td><form align="left" action="./babble_details"> 
+<td><form align="left" action="./babble_details?id=${babble.id}"> 
     <input type="submit" name="babbleIDLink" value="${babble.id}"/> ${babble.text}
 </form></td> 
 <td>${babble.created}</td>

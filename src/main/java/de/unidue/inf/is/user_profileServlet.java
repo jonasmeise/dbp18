@@ -23,7 +23,6 @@ public final class user_profileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String initialUserID ="FooBar";	//unser User (wir)
     private String userID="FooBar";		//startseite (beginnend mit uns) und userID der jeweiligen Seiten
-    babble_detailsServlet bds = null;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,22 +32,34 @@ public final class user_profileServlet extends HttpServlet {
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
 		
-		
-		
-		
-		
 		//SQL Abfrage für die Persönlichen Daten nach derzeitiger userID
     	
+		if(!userID.equals(initialUserID)) {
+			request.setAttribute("inputType", "hidden");
+		}
+		else
+		{
+			request.setAttribute("inputType", "submit");
+		}
+		
     	try {
 			myConnection = myDB.getConnection("babble");
 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT foto,username,name,status FROM BabbleUser WHERE username = ?");
 			myPrepStatement.setString(1, userID);
 			ResultSet resultSet = myPrepStatement.executeQuery();
 			
+			request.setAttribute("foto", "");
+			request.setAttribute("username", "");
+			request.setAttribute("name", "");
+			request.setAttribute("status", "");
 
 		while (resultSet.next()){
 				
-				request.setAttribute("foto", "http"); // TODO wenn leer ist wie in beispieltabelle kommt fehler
+				String speicher = resultSet.getString("foto");
+				if(speicher!="" && speicher!=null) {
+					request.setAttribute("foto", resultSet.getString(speicher));
+				}
+
 				request.setAttribute("username", resultSet.getString("username"));
 				request.setAttribute("name", resultSet.getString("name"));
 				request.setAttribute("status", resultSet.getString("status"));
@@ -134,15 +145,13 @@ public final class user_profileServlet extends HttpServlet {
     	 
     	 try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE creator = ? ORDER BY id DESC");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble WHERE creator = ? ORDER BY id DESC");
  			myPrepStatement.setString(1, userID);
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
  	
  		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten und alle like/retweet tabellen joinen einfach wenn mehrere babbles kommen , ein problem wird nur eventuell auch das in der gui als ganz viele verschiedene babbels auszugeben, im moment nur mit 1 wie gesagt
- 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,"2")); //ID klappt nicht zu übergeben
- 				babblelist.add(new Babble("dbuser","guck","fuck",0,0,0,"1"));
- 				babblelist.add(new Babble("FooBar","sdgfs","sdf",43,2,0,"2"));
+ 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,resultSet.getString("id"))); //ID klappt nicht zu übergeben
  				request.setAttribute("babblelist", babblelist);
  				
  		}
@@ -174,8 +183,7 @@ public final class user_profileServlet extends HttpServlet {
        userID = request.getParameter("MyPage");
        doGet(request, response);
     }else if (request.getParameter("babbleIDLink") != null){
-    	bds.setCurrentBabbleID(request.getParameter("babbleIDLink")); //TODO irgendwie diese scheiß id übergeben
-    	//bds.doGet(request, response);
+    	
     }else  if (request.getParameter("follow") != null){
     	
     	//TODO SQL für Followbutton reintun und dann wenn nicht insert into follow
@@ -183,12 +191,7 @@ public final class user_profileServlet extends HttpServlet {
     }else if (request.getParameter("block") != null){
     	//TODO SQL für Blockbutton reintun und dann wenn nicht insert into blocks
     	doGet(request, response);
-    }
-       
-       
-        
-       
-        
+    }   
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
     }
     
