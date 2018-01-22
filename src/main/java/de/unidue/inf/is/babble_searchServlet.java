@@ -35,14 +35,13 @@ public final class babble_searchServlet extends HttpServlet {
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
-
+		request.setAttribute("babblelist", babblelist);
 		
 		try {
  			myConnection = myDB.getConnection("babble");
  			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE ? ORDER BY id DESC");
  			myPrepStatement.setString(1,"%"+searched+"%"); //searched klappt nicht '%Ich%' scheiße klappt nicht;
  			ResultSet resultSet = myPrepStatement.executeQuery();
-
 
  		while (resultSet.next()){	//TODO klappt nicht
 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,"2")); //ID klappt nicht zu übergeben
