@@ -18,7 +18,7 @@ import de.unidue.inf.is.utils.DBUtil;
 public final class babble_detailsServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private String currentBabbleID="1";
+    private String currentBabbleID="1"; //default = 1
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
