@@ -19,4 +19,18 @@ public final class babble_createServlet extends HttpServlet {
                     throws ServletException, IOException {
         request.getRequestDispatcher("babble_create.ftl").forward(request, response);
     }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+                    IOException {
+    
+    if (request.getParameter("createButton") != null) {
+       //SQL mit insert into babble mit eingegebenen text etc.
+       doGet(request, response);
+ 
+        request.getRequestDispatcher("babble_create.ftl").forward(request, response);
+    }
+    
+   }
+   
 }

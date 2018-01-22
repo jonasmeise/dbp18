@@ -35,6 +35,8 @@ public final class user_profileServlet extends HttpServlet {
 		
 		
 		
+		
+		
 		//SQL Abfrage für die Persönlichen Daten nach derzeitiger userID
     	
     	try {

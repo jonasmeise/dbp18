@@ -23,6 +23,8 @@ public final class babble_searchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private String searched ="Ich";
     
+    //TODO man braucht irgendeinen Fall mit der initialisierung von babblelist, wenn diese noch nicht existiert
+    //d.h. wenn man die Website zB zum ersten mal startet ohne davor ein doPost aufzurufen -> Freemarker error
     
 
     @Override
@@ -33,9 +35,7 @@ public final class babble_searchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
                     IOException {
-    	System.out.println(searched);
     	searched = request.getParameter("search");
-    	System.out.println(searched);
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
@@ -43,7 +43,7 @@ public final class babble_searchServlet extends HttpServlet {
 		try {
  			myConnection = myDB.getConnection("babble");
  			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE '%Ich%' ORDER BY id DESC");
- 			myPrepStatement.setString(1, "'%Ich%'"); //searched klappt nicht '%Ich%' scheiße klappt nicht
+ 			//myPrepStatement.setString(1, searched); //searched klappt nicht '%Ich%' scheiße klappt nicht
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			System.out.println(resultSet.toString());
  	
