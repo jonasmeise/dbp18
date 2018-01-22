@@ -1,6 +1,6 @@
 <html>
-<head><title>babble_search</title></head>
-<body>
+<head><title>babble_search</title>
+<header> 
 Search:
 <form method="post" action="./babble_search">
 <input type="text" name="search" value="sample: Ich" maxlength="300"/>
@@ -8,6 +8,7 @@ Search:
 </form>
 
 <br>
+<body>
 Search result:
 
 <table class="datatable">
