@@ -22,6 +22,7 @@ public final class babble_searchServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private String searched ="Ich";
+
     
     //TODO man braucht irgendeinen Fall mit der initialisierung von babblelist, wenn diese noch nicht existiert
     //d.h. wenn man die Website zB zum ersten mal startet ohne davor ein doPost aufzurufen -> Freemarker error
@@ -30,26 +31,22 @@ public final class babble_searchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
                     throws ServletException, IOException {
-    }
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                    IOException {
-    	searched = request.getParameter("search");
+    	
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
+
 		
 		try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE '%Ich%' ORDER BY id DESC");
- 			//myPrepStatement.setString(1, searched); //searched klappt nicht '%Ich%' scheiße klappt nicht
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE ? ORDER BY id DESC");
+ 			myPrepStatement.setString(1,"%"+searched+"%"); //searched klappt nicht '%Ich%' scheiße klappt nicht;
  			ResultSet resultSet = myPrepStatement.executeQuery();
- 			System.out.println(resultSet.toString());
- 	
+
+
  		while (resultSet.next()){	//TODO klappt nicht
- 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,"2")); //ID klappt nicht zu übergeben
- 				request.setAttribute("babblelist", babblelist); //resultSet ist immer leer String
+			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,"2")); //ID klappt nicht zu übergeben
+			request.setAttribute("babblelist", babblelist); //resultSet ist immer leer String
  		}
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
@@ -63,13 +60,18 @@ public final class babble_searchServlet extends HttpServlet {
  				e.printStackTrace();
  			}
  		}
- 		
-     
-       
-        
-        
 		
-        request.getRequestDispatcher("babble_search.ftl").forward(request, response);
+		request.getRequestDispatcher("babble_search.ftl").forward(request, response);
+    	
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+                    IOException {
+    	
+ 		
+    	searched = request.getParameter("search");
+    	doGet(request,response);
     }
 }
 
