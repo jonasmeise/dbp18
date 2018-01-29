@@ -60,7 +60,7 @@
 </br>
 <p> Babbles: </p>
 
-<table class="datatable">
+<table class="datatable" type="hidden">
     <tr>
         <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Rebabbles</th> <th>Likes</th> <th>Dislikes</th>
     </tr>
