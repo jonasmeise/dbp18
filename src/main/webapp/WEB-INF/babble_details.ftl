@@ -9,10 +9,32 @@
 
 
 <br>
-    <button type="submit"/>Like
-    <button type="submit"/>Dislike
-    <button type="submit"/>Rebabble
-    <button type="submit"/>Delete Babble
+    
+    <div id="outer">
+        <div class="inner">
+<form method="post" action="./babble_details"> 
+<input type="submit" name="likeButton" value="Like"/>
+</form>
+</div>
+
+    <div class="inner">
+<form method="post" action="./babble_details"> 
+<input type="submit" name="dislikeButton" value="Dislike"/>
+</form>
+</div>
+
+    <div class="inner">
+<form method="post" action="./babble_details"> 
+<input type="submit" name="rebabbleButton" value="Rebabble"/>
+</form>
+</div>
+    
+    <div class="inner">
+<form method="post" action="./babble_details"> 
+<input type="submit" name="deleteButton" value="Delete"/>
+</form>
+</div>
+</div>
     
     <input type="hidden" name="babbleIDLink" id="babbleIDLink" />
 </body>
