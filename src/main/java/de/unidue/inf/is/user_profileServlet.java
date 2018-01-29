@@ -189,7 +189,7 @@ public final class user_profileServlet extends HttpServlet {
     }else if (request.getParameter("follow") != null){
     	try{
     		myConnection = myDB.getConnection("babble");
-    		System.out.println(request.getParameter("follows").toString());
+    		System.out.println(request.getParameter("follow").toString());
     	if(request.getParameter("follow").toString().equals("Follow")){
     		PreparedStatement myInsertStatement =  myConnection.prepareStatement("INSERT INTO follows (follower, followee) VALUES (?,?)");
 			myInsertStatement.setString(1, initialUserID);
