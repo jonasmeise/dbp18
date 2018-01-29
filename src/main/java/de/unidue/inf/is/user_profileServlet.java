@@ -75,40 +75,6 @@ public final class user_profileServlet extends HttpServlet {
 			}
 		}
     	
-    	//SQL-Abfrage für blocked 
-    	
-    	 
-    	if (userID.equals("FooBar")) {
-	    	request.setAttribute("block","You are not blocked");
-	    	request.setAttribute("reason", "this is your page idiot");
-	    } else {
-    	try {
-			myConnection = myDB.getConnection("babble");
-			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT reason FROM blocks WHERE blocker = ? AND blockee = ?");
-			myPrepStatement.setString(1, userID);
-			myPrepStatement.setString(2, initialUserID);
-			ResultSet resultSet = myPrepStatement.executeQuery();
-			
-			if(resultSet==null){//TODO das hier ist der fehler wahrscheinlich
-				request.setAttribute("block","You are not blocked!");
-		    	request.setAttribute("reason","you are cool");
-			}else{
-				request.setAttribute("block","You are blocked");
-		    	request.setAttribute("reason", "testreason"); //TODO funktioniert nicht wenn reason leer
-		    }
-    	} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				myConnection.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} 
-		}
-		
     	
     	//SQL-Abfrage für follow
     	

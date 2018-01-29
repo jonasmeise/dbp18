@@ -56,7 +56,6 @@
     <input type=${inputType} name="newBabbleButton" value="New Babble"/>
 </form>
 
-<p> ${block} , because ${reason} </p>
 </br>
 </br>
 <p> Babbles: </p>
