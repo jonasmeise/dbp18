@@ -86,6 +86,7 @@ public final class user_profileServlet extends HttpServlet {
     	 
     	 request.setAttribute("follows", "Follow");
     	 request.setAttribute("blockedReason", "");
+    	 request.setAttribute("blockedStatus", "display:inline");
     	 
     	try {
     	myConnection = myDB.getConnection("babble");
