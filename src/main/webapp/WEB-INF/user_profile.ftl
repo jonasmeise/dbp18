@@ -25,7 +25,7 @@
 
 
 <div class="inner">
-<form method="post"> 
+<form method="post" action="./user_profile"> 
 <input type=${followType} name="follow" value="${follows}" />
 </form>
 </div>
