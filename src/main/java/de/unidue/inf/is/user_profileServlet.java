@@ -188,21 +188,21 @@ public final class user_profileServlet extends HttpServlet {
        doGet(request, response);
     }else if (request.getParameter("follow") != null){
     	try{
-    	//if(request.getAttribute("follows").equals("Follow")){
+    	if(request.getAttribute("follows").toString().equals("Follow")){
     		myConnection = myDB.getConnection("babble");
     		PreparedStatement myInsertStatement =  myConnection.prepareStatement("INSERT INTO follows (follower, followee) VALUES (?,?)");
 			myInsertStatement.setString(1, initialUserID);
 			myInsertStatement.setString(2, userID);
 			myInsertStatement.executeUpdate();
 			request.setAttribute("follows", "Dont Follow anymore");
-    	/*}else{
+    	}else{
     		myConnection = myDB.getConnection("babble");
 			PreparedStatement myDeleteStatement = myConnection.prepareStatement("DELETE FROM follows WHERE follower = ? AND followee = ?");
 			myDeleteStatement.setString(1, initialUserID);
 			myDeleteStatement.setString(2, userID);
 			myDeleteStatement.executeUpdate();
 			request.setAttribute("follows", "Follow");
-    }*/
+    }
     	}catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
