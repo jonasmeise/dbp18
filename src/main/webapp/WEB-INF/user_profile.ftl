@@ -32,7 +32,7 @@
 
 <div class="inner">
 <form method="post" action="./user_profile">
-<input type="submit" name="block" value="Block/Unblocked" />
+<input type=${blockType}" name="block" value="${blocks}" />
 </form>
 </div>
 

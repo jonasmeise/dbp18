@@ -140,7 +140,38 @@ public final class user_profileServlet extends HttpServlet {
  				e.printStackTrace();
  			}
  		}
-    	 
+    	
+    	//SQL-Abfrage für block
+    	
+   	 if (userID.equals("FooBar")) {
+		    	request.setAttribute("blockType","hidden");
+   	 } else {
+		    	request.setAttribute("blockType","submit");
+		 }
+   	 
+   	 request.setAttribute("blocks", "Block");
+   	 
+   	try {
+   	myConnection = myDB.getConnection("babble");
+		PreparedStatement myStatement =  myConnection.prepareStatement("SELECT blocker, blockee FROM blocks WHERE blocker=? AND blockee = ?");
+			myStatement.setString(1, initialUserID);
+			myStatement.setString(2, userID);
+			ResultSet resultSet = myStatement.executeQuery();
+			while(resultSet.next()){
+			request.setAttribute("blocks", "Dont Block anymore");
+			}
+   	 }catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				myConnection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+   	 
     	 
     	 //SQL-Abfrage für Babbles
     	 
@@ -183,13 +214,15 @@ public final class user_profileServlet extends HttpServlet {
     if (request.getParameter("profileLink") != null) {
        userID = request.getParameter("profileLink");
        doGet(request, response);
+       
     }else if (request.getParameter("MyPage") != null) {
        userID = request.getParameter("MyPage");
        doGet(request, response);
+       
+       //followButton mit switch etc. funktioniert, statt farben mit text
     }else if (request.getParameter("follow") != null){
     	try{
     		myConnection = myDB.getConnection("babble");
-    		System.out.println(request.getParameter("follow").toString());
     	if(request.getParameter("follow").toString().equals("Follow")){
     		PreparedStatement myInsertStatement =  myConnection.prepareStatement("INSERT INTO follows (follower, followee) VALUES (?,?)");
 			myInsertStatement.setString(1, initialUserID);
@@ -215,7 +248,36 @@ public final class user_profileServlet extends HttpServlet {
 		}
 	}
 	    doGet(request, response);
-    } 
+	    
+    }else if (request.getParameter("block") != null){
+    	try{
+    		myConnection = myDB.getConnection("babble");
+    	if(request.getParameter("block").toString().equals("Block")){
+    		PreparedStatement myInsertStatement =  myConnection.prepareStatement("INSERT INTO blocks (blocker, blockee) VALUES (?,?)");
+			myInsertStatement.setString(1, initialUserID);
+			myInsertStatement.setString(2, userID);
+			myInsertStatement.executeUpdate();
+			request.setAttribute("blocks", "Dont Block anymore");
+    	}else if(request.getParameter("block").toString().equals("Dont Block anymore")){
+			PreparedStatement myDeleteStatement = myConnection.prepareStatement("DELETE FROM blocks WHERE blocker = ? AND blockee = ?");
+			myDeleteStatement.setString(1, initialUserID);
+			myDeleteStatement.setString(2, userID);
+			myDeleteStatement.executeUpdate();
+			request.setAttribute("blocks", "Block");
+    }
+    	}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}finally {
+		try {
+			myConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	    doGet(request, response);
+    }  
     }
     
     
