@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import de.unidue.inf.is.domain.Babble;
-import de.unidue.inf.is.domain.User;
-import de.unidue.inf.is.stores.UserStore;
 import de.unidue.inf.is.utils.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
