@@ -59,8 +59,9 @@
 </br>
 </br>
 <p> Babbles: </p>
-
-<table class="datatable" type="hidden">
+<p>${blockedReason} </p>
+<div style=${blockedStatus}>
+<table class="datatable">
     <tr>
         <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Rebabbles</th> <th>Likes</th> <th>Dislikes</th>
     </tr>
@@ -81,6 +82,7 @@
     
     </#list>
   </table>
+  </div>
 
 </br>
 </body>

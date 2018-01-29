@@ -85,6 +85,7 @@ public final class user_profileServlet extends HttpServlet {
 		 }
     	 
     	 request.setAttribute("follows", "Follow");
+    	 request.setAttribute("blockedReason", "");
     	 
     	try {
     	myConnection = myDB.getConnection("babble");
@@ -140,7 +141,32 @@ public final class user_profileServlet extends HttpServlet {
    	 
     	 
     	 //SQL-Abfrage für Babbles
-    	 
+   	
+   	//Check if you are blocked
+   		try {
+			myConnection = myDB.getConnection("babble");
+			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT blocker, blockee, reason from blocks where blocker=? AND blockee=?");
+			myPrepStatement.setString(1, userID);
+			myPrepStatement.setString(1, initialUserID);
+			ResultSet resultSet = myPrepStatement.executeQuery();
+			
+		while (resultSet.next()){	
+			request.setAttribute("blockedStatus", "display:none");
+			request.setAttribute("blockedReason", "You are blocked. Reason:" + resultSet.getString("reason").toString());
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				myConnection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+   		
+   		//Babbles
     	 try {
  			myConnection = myDB.getConnection("babble");
  			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble WHERE creator = ? ORDER BY id DESC");
