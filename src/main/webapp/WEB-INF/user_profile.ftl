@@ -26,7 +26,7 @@
 
 <div class="inner">
 <form method="post" action="./user_profile"> 
-<input type="submit" name="follow" value="Follow/Unfollow" />
+<input type=${followType} name="follow" value="${follows}" />
 </form>
 </div>
 
@@ -57,7 +57,6 @@
 </form>
 
 <p> ${block} , because ${reason} </p>
-<p> ${follow} </p>
 </br>
 </br>
 <p> Babbles: </p>
@@ -72,7 +71,7 @@
     <input type="submit" name="profileLink" value="${babble.creator}"/>
 </form></td> 
 <td><form align="left" action="./babble_details?id=${babble.id}"> 
-    <input type="submit" name="babbleIDLink" value="${babble.id}"/> ${babble.text}
+    <input type="submit" name="babbleIDButton" value="${babble.id}"/> ${babble.text}
 </form></td> 
 <td>${babble.created}</td>
 <td>${babble.likes}</td>

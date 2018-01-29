@@ -113,31 +113,34 @@ public final class user_profileServlet extends HttpServlet {
     	//SQL-Abfrage für follow
     	
     	 if (userID.equals("FooBar")) {
-		    	request.setAttribute("follow","You cant follow yourself");
-		    } else {
-		    	try {
-					myConnection = myDB.getConnection("babble");
-					PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT follower, followee FROM follows WHERE follower = ? and followee = ?");
-					myPrepStatement.setString(1, initialUserID);
-					myPrepStatement.setString(2, userID);
-					ResultSet resultSet = myPrepStatement.executeQuery();
-					if(resultSet==null){ //TODO das hier ist der fehler wahrscheinlich
-						request.setAttribute("follow","You dont follow this dude");
-					}else{
-						request.setAttribute("follow","You follow this dude!");
-				    }
-		    	} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					try {
-						myConnection.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-		    }
+		    	request.setAttribute("followType","hidden");
+    	 } else {
+		    	request.setAttribute("followType","submit");
+		 }
+    	 
+    	 request.setAttribute("follows", "Follow");
+    	 
+    	try {
+    	myConnection = myDB.getConnection("babble");
+ 		PreparedStatement myStatement =  myConnection.prepareStatement("SELECT follower, followee FROM follows WHERE follower=? AND followee = ?");
+			myStatement.setString(1, initialUserID);
+			myStatement.setString(2, userID);
+			ResultSet resultSet = myStatement.executeQuery();
+			while(resultSet.next()){
+			request.setAttribute("follows", "Dont Follow anymore");
+			}
+    	 }catch (SQLException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		} finally {
+ 			try {
+ 				myConnection.close();
+ 			} catch (SQLException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 		}
+    	 
     	 
     	 //SQL-Abfrage für Babbles
     	 
@@ -173,25 +176,48 @@ public final class user_profileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
                     IOException {
-    
+
+    	Connection myConnection = null;
+		DBUtil myDB = null;
+    	
     if (request.getParameter("profileLink") != null) {
        userID = request.getParameter("profileLink");
        doGet(request, response);
     }else if (request.getParameter("MyPage") != null) {
        userID = request.getParameter("MyPage");
        doGet(request, response);
-    }else if (request.getParameter("babbleIDLink") != null){
-    	
-    }else  if (request.getParameter("follow") != null){
-    	
-    	//TODO SQL für Followbutton reintun und dann wenn nicht insert into follow
-    	doGet(request, response);
-    }else if (request.getParameter("block") != null){
-    	//TODO SQL für Blockbutton reintun und dann wenn nicht insert into blocks
-    	doGet(request, response);
+    }else if (request.getParameter("follow") != null){
+    	try{
+    	if(request.getAttribute("follows").equals("Follow")){
+    		myConnection = myDB.getConnection("babble");
+    		PreparedStatement myInsertStatement =  myConnection.prepareStatement("INSERT INTO follows (follower, followee) VALUES (?,?)");
+			myInsertStatement.setString(1, initialUserID);
+			myInsertStatement.setString(2, userID);
+			myInsertStatement.executeUpdate();
+			request.setAttribute("follows", "Dont Follow anymore");
+    	}else{
+    		myConnection = myDB.getConnection("babble");
+			PreparedStatement myDeleteStatement = myConnection.prepareStatement("DELETE FROM follows WHERE follower = ? AND followee = ?");
+			myDeleteStatement.setString(1, initialUserID);
+			myDeleteStatement.setString(2, userID);
+			myDeleteStatement.executeUpdate();
+			request.setAttribute("follows", "Follow");
+    }
+    	}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}finally {
+		try {
+			myConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
     }   
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
     }
+    
     
    }
 
