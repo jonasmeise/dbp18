@@ -203,7 +203,6 @@ public final class user_profileServlet extends HttpServlet {
 			myDeleteStatement.executeUpdate();
 			request.setAttribute("follows", "Follow");
     }
-    	request.getRequestDispatcher("user_profile.ftl").forward(request, response);
     	}catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -215,7 +214,8 @@ public final class user_profileServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-    }   
+    } 
+    doGet(request, response);
     }
     
     
