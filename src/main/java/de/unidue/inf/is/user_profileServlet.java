@@ -151,7 +151,7 @@ public final class user_profileServlet extends HttpServlet {
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
  	
- 		while (resultSet.next()){	//lösung für nur 1 babble, ResultSet muss man irgendwie splitten und alle like/retweet tabellen joinen einfach wenn mehrere babbles kommen , ein problem wird nur eventuell auch das in der gui als ganz viele verschiedene babbels auszugeben, im moment nur mit 1 wie gesagt
+ 		while (resultSet.next()){	
  				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,resultSet.getString("id"))); //ID klappt nicht zu übergeben
  				request.setAttribute("babblelist", babblelist);
  				
@@ -215,7 +215,7 @@ public final class user_profileServlet extends HttpServlet {
 		}
 	}
     }   
-        request.getRequestDispatcher("user_profile.ftl").forward(request, response);
+    doGet(request, response);
     }
     
     
