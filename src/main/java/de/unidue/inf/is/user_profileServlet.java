@@ -189,13 +189,14 @@ public final class user_profileServlet extends HttpServlet {
     }else if (request.getParameter("follow") != null){
     	try{
     		myConnection = myDB.getConnection("babble");
-    	if(request.getParameter("follows").equals("Follow")){
+    		System.out.println(request.getParameter("follows").toString());
+    	if(request.getParameter("follow").toString().equals("Follow")){
     		PreparedStatement myInsertStatement =  myConnection.prepareStatement("INSERT INTO follows (follower, followee) VALUES (?,?)");
 			myInsertStatement.setString(1, initialUserID);
 			myInsertStatement.setString(2, userID);
 			myInsertStatement.executeUpdate();
 			request.setAttribute("follows", "Dont Follow anymore");
-    	}else if(request.getParameter("follows").equals("Dont Follow anymore")){
+    	}else if(request.getParameter("follow").toString().equals("Dont Follow anymore")){
 			PreparedStatement myDeleteStatement = myConnection.prepareStatement("DELETE FROM follows WHERE follower = ? AND followee = ?");
 			myDeleteStatement.setString(1, initialUserID);
 			myDeleteStatement.setString(2, userID);
