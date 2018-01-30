@@ -146,14 +146,14 @@ public final class user_profileServlet extends HttpServlet {
    	//Check if you are blocked
    		try {
 			myConnection = myDB.getConnection("babble");
-			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT blocker, blockee, reason from blocks where blocker=? AND blockee=?");
+			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT blocker, blockee from blocks where blocker=? AND blockee=?");
 			myPrepStatement.setString(1, userID);
 			myPrepStatement.setString(1, initialUserID);
 			ResultSet resultSet = myPrepStatement.executeQuery();
 			
 		while (resultSet.next()){	
 			request.setAttribute("blockedStatus", "display:none");
-			request.setAttribute("blockedReason", "You are blocked. Reason:" + resultSet.getString("reason").toString());
+			request.setAttribute("blockedReason", "You are blocked. Reason:");
 		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
