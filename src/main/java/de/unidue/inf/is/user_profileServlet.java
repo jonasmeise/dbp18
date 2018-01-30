@@ -173,7 +173,7 @@ public final class user_profileServlet extends HttpServlet {
    		//Babbles
     	 try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble WHERE creator = ? ORDER BY id DESC");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ? ORDER BY b.id DESC");
  			myPrepStatement.setString(1, userID);
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
