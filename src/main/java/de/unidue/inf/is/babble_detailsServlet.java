@@ -160,5 +160,9 @@ public final class babble_detailsServlet extends HttpServlet {
  				e.printStackTrace();
  			}
  		}
+		
+		if (request.getParameter("back") != null) {
+			response.sendRedirect("./user_profile");
+		}
     }       
 }

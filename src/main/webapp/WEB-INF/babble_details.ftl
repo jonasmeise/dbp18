@@ -40,5 +40,9 @@
     
     <input type="hidden" name="babbleIDLink" id="babbleIDLink" />
     
+    
+<form align="right"> 
+    <input type=submit name="back" value="Back to User Profile"/>
+</form>
 </body>
 </html>
