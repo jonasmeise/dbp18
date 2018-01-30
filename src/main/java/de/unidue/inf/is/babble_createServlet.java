@@ -44,7 +44,7 @@ public final class babble_createServlet extends HttpServlet {
 			System.out.println(request.getParameter("textarea"));
 			PreparedStatement myPrepStatement = myConnection.prepareStatement("INSERT INTO Babble (text,creator) VALUES (? , ?)");
 			myPrepStatement.setString(1, request.getParameter("textarea"));
-			myPrepStatement.setString(1, initialUserID);
+			myPrepStatement.setString(2, initialUserID);
 			myPrepStatement.executeUpdate();
 		}
 				
