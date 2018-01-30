@@ -21,6 +21,7 @@ import de.unidue.inf.is.utils.DBUtil;
 public final class babble_createServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private static final String initialUserID = "FooBar";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,8 +42,9 @@ public final class babble_createServlet extends HttpServlet {
     	try {
 			myConnection = myDB.getConnection("babble");
 			System.out.println(request.getParameter("textarea"));
-			PreparedStatement myPrepStatement = myConnection.prepareStatement("INSERT INTO Babble (text,creator) VALUES (? , 'FooBar')");
+			PreparedStatement myPrepStatement = myConnection.prepareStatement("INSERT INTO Babble (text,creator) VALUES (? , ?)");
 			myPrepStatement.setString(1, request.getParameter("textarea"));
+			myPrepStatement.setString(1, initialUserID);
 			myPrepStatement.executeUpdate();
 		}
 				
@@ -58,7 +60,6 @@ public final class babble_createServlet extends HttpServlet {
 			}
 		}
     	response.sendRedirect("./user_profile");
-       //doGet(request, response);
     }
    }
 }

@@ -31,10 +31,10 @@ public final class babble_detailsServlet extends HttpServlet {
 		request.setAttribute("rebabbles", 0);
 		
     	try {
- 			myConnection = myDB.getConnection("babble");	//"SELECT text, created,creator FROM babble JOIN likesbabble ON babble.id=likesbabble.babble JOIN rebabble ON babble.id=rebabble.babble WHERE babble.id = ? ");
+ 			myConnection = myDB.getConnection("babble");
  			
  			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text, created, creator FROM babble WHERE id = ?");
- 			myPrepStatement.setString(1, request.getParameter("babbleIDLink"));	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
+ 			myPrepStatement.setString(1, request.getParameter("babbleIDLink"));	
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
  			PreparedStatement likeStatement = myConnection.prepareStatement("SELECT babble, count(type) as likes FROM LikesBabble WHERE type='like' AND babble = ? GROUP BY babble");
@@ -145,6 +145,7 @@ public final class babble_detailsServlet extends HttpServlet {
 		 			myPrepStatement.setString(1, request.getParameter("babbleIDLink"));	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
 		 			myPrepStatement.setString(2, initialUserID);
 		 			myPrepStatement.executeUpdate();	
+		 			response.sendRedirect("./user_profile");
 		 			
 		 	}
 

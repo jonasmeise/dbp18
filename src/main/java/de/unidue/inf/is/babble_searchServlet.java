@@ -40,12 +40,12 @@ public final class babble_searchServlet extends HttpServlet {
 		try {
  			myConnection = myDB.getConnection("babble");
  			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator FROM babble WHERE text LIKE ? ORDER BY id DESC");
- 			myPrepStatement.setString(1,"%"+searched+"%"); //searched klappt nicht '%Ich%' scheiße klappt nicht;
+ 			myPrepStatement.setString(1,"%"+searched+"%");
  			ResultSet resultSet = myPrepStatement.executeQuery();
 
- 		while (resultSet.next()){	//TODO klappt nicht
+ 		while (resultSet.next()){
 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,"2")); //ID klappt nicht zu übergeben
-			request.setAttribute("babblelist", babblelist); //resultSet ist immer leer String
+			request.setAttribute("babblelist", babblelist);
  		}
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
