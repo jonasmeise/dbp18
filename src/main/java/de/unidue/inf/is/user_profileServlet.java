@@ -178,8 +178,8 @@ public final class user_profileServlet extends HttpServlet {
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
  	
- 		while (resultSet.next()){	
- 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),resultSet.getString("likes").toString(),"","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
+ 		while (resultSet.next()){					//resultSet.getString("likes").toString()
+ 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"","","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
  				request.setAttribute("babblelist", babblelist);
  		
  		}
