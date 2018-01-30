@@ -173,7 +173,7 @@ public final class user_profileServlet extends HttpServlet {
    		//Babbles
     	 try {
  			myConnection = myDB.getConnection("babble");
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b JOIN LikesBabble lb ON b.id = lb.babble  WHERE lb.type = 'likes' AND b.creator = ? ORDER BY b.id DESC");
+ 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id, lb.babble, count(lb.babble) AS likes FROM babble b JOIN LikesBabble lb ON b.id = lb.babble  WHERE lb.type = 'likes' AND b.creator = ? GROUP BY lb.babble ORDER BY b.id DESC");
  			myPrepStatement.setString(1, userID);
  			ResultSet resultSet = myPrepStatement.executeQuery();
  			
