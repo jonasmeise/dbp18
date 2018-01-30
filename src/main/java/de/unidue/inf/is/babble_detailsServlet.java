@@ -106,7 +106,7 @@ public final class babble_detailsServlet extends HttpServlet {
 		 			myPrepStatement.setString(1, initialUserID);
 		 			myPrepStatement.setString(2, request.getParameter("babbleIDLink"));	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
 		 			myPrepStatement.executeUpdate();
-		    		myUpdateStatement.executeUpdate();
+		    		//myUpdateStatement.executeUpdate();
 		    		
 				    doGet(request, response);
 		    }
@@ -124,7 +124,7 @@ public final class babble_detailsServlet extends HttpServlet {
 		 			myPrepStatement.setString(1, initialUserID);
 		 			myPrepStatement.setString(2, request.getParameter("babbleIDLink"));	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
 		 			myPrepStatement.executeUpdate();
-		    		myUpdateStatement.executeUpdate();
+		    		//myUpdateStatement.executeUpdate();
 				    doGet(request, response);
 		    }
 		    if (request.getParameter("rebabbleButton") != null) {
