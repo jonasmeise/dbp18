@@ -162,7 +162,7 @@ public final class babble_detailsServlet extends HttpServlet {
  		}
 		
 		if (request.getParameter("back") != null) {
-			response.sendRedirect("./user_profile");
+			
 		}
     }       
 }
