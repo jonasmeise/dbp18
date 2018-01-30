@@ -5,12 +5,12 @@ public class Babble {
 	private String creator="";
 	private String text="";
 	private String created="";
-	private int likes=0;
-	private int dislikes=0;
-	private int rebabbles=0;
+	private String likes="";
+	private String dislikes= "";
+	private String rebabbles="";
 	private String id="";
 	
-public Babble(String creator, String text, String created, int likes, int dislikes, int rebabbles,String id){
+public Babble(String creator, String text, String created, String likes, String dislikes, String rebabbles,String id){
 	this.setCreator(creator);
 	this.setText(text);
 	this.setCreated(created);
@@ -20,29 +20,6 @@ public Babble(String creator, String text, String created, int likes, int dislik
 	this.setId(id);
 }
 
-public int getRebabbles() {
-	return rebabbles;
-}
-
-public void setRebabbles(int rebabbles) {
-	this.rebabbles = rebabbles;
-}
-
-public int getDislikes() {
-	return dislikes;
-}
-
-public void setDislikes(int dislikes) {
-	this.dislikes = dislikes;
-}
-
-public int getLikes() {
-	return likes;
-}
-
-public void setLikes(int likes) {
-	this.likes = likes;
-}
 
 public String getText() {
 	return text;
@@ -74,6 +51,36 @@ public String getId() {
 
 public void setId(String id) {
 	this.id = id;
+}
+
+
+public String getLikes() {
+	return likes;
+}
+
+
+public void setLikes(String likes) {
+	this.likes = likes;
+}
+
+
+public String getDislikes() {
+	return dislikes;
+}
+
+
+public void setDislikes(String dislikes) {
+	this.dislikes = dislikes;
+}
+
+
+public String getRebabbles() {
+	return rebabbles;
+}
+
+
+public void setRebabbles(String rebabbles) {
+	this.rebabbles = rebabbles;
 }
 
 }
