@@ -60,7 +60,7 @@
 </br>
 <p> Babbles: </p>
 <p>${blockedReason} </p>
-<div style=display:none>
+<div style=${blockedStatus}>
 <table class="datatable">
     <tr>
         <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Rebabbles</th> <th>Likes</th> <th>Dislikes</th>

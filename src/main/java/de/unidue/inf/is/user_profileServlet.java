@@ -152,9 +152,10 @@ public final class user_profileServlet extends HttpServlet {
 			ResultSet resultSet = myPrepStatement.executeQuery();
 			
 		while (resultSet.next()){	
-			//request.setAttribute("blockedStatus", "display:none");
+			request.setAttribute("blockedStatus", "display:none");
 			request.setAttribute("blockedReason", "You are blocked. Reason:");
 		}
+		request.getRequestDispatcher("user_profile.ftl").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -178,7 +179,7 @@ public final class user_profileServlet extends HttpServlet {
  		while (resultSet.next()){	
  				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),0,0,0,resultSet.getString("id"))); //ID klappt nicht zu übergeben
  				request.setAttribute("babblelist", babblelist);
- 				
+ 		
  		}
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
