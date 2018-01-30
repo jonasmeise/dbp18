@@ -95,7 +95,7 @@ public final class babble_detailsServlet extends HttpServlet {
 			PreparedStatement myDeleteStatement;
 			
 		    if (request.getParameter("likeButton") != null) {
-		    		PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
+		    		//PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
 		    	
 		    		myDeleteStatement = myConnection.prepareStatement("DELETE FROM LikesBabble WHERE username=? AND babble=?");
 		    		myDeleteStatement.setString(1, initialUserID);
@@ -113,7 +113,7 @@ public final class babble_detailsServlet extends HttpServlet {
 		    
 		    
 		    if (request.getParameter("dislikeButton") != null) {
-		    	PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
+		    	//PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
 		    	
 	    			myDeleteStatement = myConnection.prepareStatement("DELETE FROM LikesBabble WHERE username=? AND babble=?");
 		    		myDeleteStatement.setString(1, initialUserID);
