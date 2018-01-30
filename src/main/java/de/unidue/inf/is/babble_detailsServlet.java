@@ -97,10 +97,10 @@ public final class babble_detailsServlet extends HttpServlet {
 		    if (request.getParameter("likeButton") != null) {
 		    		PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
 		    	
-		    		/*myDeleteStatement = myConnection.prepareStatement("DELETE FROM LikesBabble WHERE username=? AND babble=?");
+		    		myDeleteStatement = myConnection.prepareStatement("DELETE FROM LikesBabble WHERE username=? AND babble=?");
 		    		myDeleteStatement.setString(1, initialUserID);
 		    		myDeleteStatement.setString(2, request.getParameter("babbleIDLink"));
-		    		myDeleteStatement.executeUpdate();*/
+		    		myDeleteStatement.executeUpdate();
 		    		
 		 			myPrepStatement = myConnection.prepareStatement("INSERT INTO LikesBabble (username, babble, type) VALUES ( ? , ? , 'like')");
 		 			myPrepStatement.setString(1, initialUserID);
@@ -114,7 +114,7 @@ public final class babble_detailsServlet extends HttpServlet {
 		    
 		    if (request.getParameter("dislikeButton") != null) {
 		    	PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
-		    	/*
+		    	
 	    			myDeleteStatement = myConnection.prepareStatement("DELETE FROM LikesBabble WHERE username=? AND babble=?");
 		    		myDeleteStatement.setString(1, initialUserID);
 	    			myDeleteStatement.setString(2, request.getParameter("babbleIDLink"));
@@ -123,7 +123,7 @@ public final class babble_detailsServlet extends HttpServlet {
 		 			myPrepStatement = myConnection.prepareStatement("INSERT INTO LikesBabble (username, babble, type) VALUES ( ? , ? , 'dislike')");
 		 			myPrepStatement.setString(1, initialUserID);
 		 			myPrepStatement.setString(2, request.getParameter("babbleIDLink"));	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
-		 			myPrepStatement.executeUpdate();*/	
+		 			myPrepStatement.executeUpdate();
 		    		myUpdateStatement.executeUpdate();
 				    doGet(request, response);
 		    }
