@@ -57,7 +57,8 @@ public final class babble_createServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-       doGet(request, response);
+    	response.sendRedirect("./user_profile");
+       //doGet(request, response);
     }
    }
 }

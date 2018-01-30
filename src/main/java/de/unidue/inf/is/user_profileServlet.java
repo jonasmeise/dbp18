@@ -85,8 +85,7 @@ public final class user_profileServlet extends HttpServlet {
 		 }
     	 
     	 request.setAttribute("follows", "Follow");
-    	 request.setAttribute("blockedReason", "");
-    	 request.setAttribute("blockedStatus", "display:inline");
+    	 
     	 
     	try {
     	myConnection = myDB.getConnection("babble");
@@ -143,8 +142,12 @@ public final class user_profileServlet extends HttpServlet {
     	 
     	 //SQL-Abfrage für Babbles
    	
-   	//Check if you are blocked
-   		try {
+   	//Check if you are blocked, funktioniert noch nicht, SQL ist richtig?
+   	
+   	request.setAttribute("blockedReason", "");
+	request.setAttribute("blockedStatus", "display:inline");
+	 
+   	/*	try {
 			myConnection = myDB.getConnection("babble");
 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT blocker, blockee FROM blocks where blocker = ? AND blockee = ?");
 			myPrepStatement.setString(1, userID);
@@ -155,7 +158,6 @@ public final class user_profileServlet extends HttpServlet {
 			request.setAttribute("blockedStatus", "display:none");
 			request.setAttribute("blockedReason", "You are blocked. Reason:");
 		}
-		request.getRequestDispatcher("user_profile.ftl").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -166,7 +168,7 @@ public final class user_profileServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		} */
    		
    		//Babbles
     	 try {
