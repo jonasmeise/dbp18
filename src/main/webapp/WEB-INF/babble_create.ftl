@@ -7,5 +7,8 @@
 <textarea name="textarea" rows="4" cols="50" maxlength="280"> </textarea>
     <input type="submit" name="createButton" value="Post Babble" />
 </form>
+<form align="right" action="./user_profile"> 
+    <input type=submit name="back" value="Back to User Profile"/>
+</form>
 </body>
 </html>
