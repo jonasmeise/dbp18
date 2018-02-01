@@ -1,6 +1,6 @@
 <html> 
 <head>
-<title>${username}/</title> 
+<title>${username}</title> 
  <style type="text/css">
     #outer
 {
