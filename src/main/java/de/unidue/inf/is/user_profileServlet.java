@@ -187,21 +187,21 @@ public final class user_profileServlet extends HttpServlet {
  			myLikedStatement.setString(1, userID);
  			ResultSet likeResultSet = myLikedStatement.executeQuery();
  			*/
- 			/*myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
- 			PreparedStatement myRebabbleStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble, rebabble WHERE babble=id AND username = ? ORDER BY id DESC");
+ 			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
+ 			PreparedStatement myRebabbleStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id FROM babble b, rebabble rb WHERE rb.babble=b.id AND rb.username = ? ORDER BY b.id DESC");
  			myRebabbleStatement.setString(1, userID);
  			ResultSet rebabbleResultSet = myRebabbleStatement.executeQuery();
- 			*/
+ 			
  	
  		while (resultSet.next()){					//resultSet.getString("likes").toString()
  				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"","","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
  				request.setAttribute("babblelist", babblelist); 
  		}
  		
- 		/*while (rebabbleResultSet.next()){					//resultSet.getString("likes").toString()
+ 		while (rebabbleResultSet.next()){					//resultSet.getString("likes").toString()
  			babblelist.add(new Babble(rebabbleResultSet.getString("creator").toString(),rebabbleResultSet.getString("text").toString(),rebabbleResultSet.getString("created").toString(),"","","",rebabbleResultSet.getString("id"))); //ID klappt nicht zu übergeben
  			request.setAttribute("babblelist", babblelist); 
- 		}*/
+ 		}
  		
  		
  		} catch (SQLException e) {
