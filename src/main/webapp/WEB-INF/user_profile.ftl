@@ -59,7 +59,8 @@
 </br>
 </br>
 <p> Babbles: </p>
-<p>${blockedReason} </p>
+<p>${blockedReason} ${reasons}</p>
+
 <div style=${blockedStatus}>
 <table class="datatable">
     <tr>
