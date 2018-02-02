@@ -17,7 +17,7 @@
     <div id="outer">
         <div class="inner">
 <form method="post" action="./babble_details?babbleIDLink=${babbleid}"> 
-<input type="submit" name="likeButton" value="Like"/>
+<input type="submit" name="likeButton" value="${likeValue}"/>
 </form>
 </div>
 
@@ -44,7 +44,7 @@
     
     
 <form align="right" action="./user_profile"> 
-    <input type=submit name="back" value="Back to User Profile"/>
+    <input type=submit name="back" value="Back to my User Profile"/>
 </form>
 </body>
 </html>

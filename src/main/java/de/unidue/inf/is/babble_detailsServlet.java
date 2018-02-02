@@ -31,10 +31,12 @@ public final class babble_detailsServlet extends HttpServlet {
 		request.setAttribute("rebabbles", 0);
 		request.setAttribute("rebabbleValue", "Rebabble");
 		request.setAttribute("deleteType", "submit");
+		request.setAttribute("likeValue", "Like");
 		
     	try {
  			myConnection = myDB.getConnection("babble");
  			
+ 			//check if already rebabbled
  	
  		 		PreparedStatement myStatement =  myConnection.prepareStatement("SELECT babble FROM Rebabble WHERE babble = ? AND username = ? ");
  				myStatement.setString(1, request.getParameter("babbleIDLink"));
@@ -43,6 +45,18 @@ public final class babble_detailsServlet extends HttpServlet {
  				while(rebabbleValueSet.next()){
  				request.setAttribute("rebabbleValue", "Dont Rebabble");
  				}
+ 				
+ 				//check if already liked
+ 				
+ 				PreparedStatement myLikedStatement =  myConnection.prepareStatement("SELECT babble FROM LikesBabble WHERE type='like' AND babble = ? AND username = ?");
+ 				myLikedStatement.setString(1, request.getParameter("babbleIDLink"));
+ 		 		myLikedStatement.setString(2, initialUserID);
+ 				ResultSet likedSet = myLikedStatement.executeQuery();
+ 				while(likedSet.next()){
+ 				request.setAttribute("likeValue", "Dont Like");
+ 				}
+ 				
+ 			//check who is creator for deleteButton
  				
  				PreparedStatement creatorStatement =  myConnection.prepareStatement("SELECT creator FROM Babble WHERE id = ?");
  				creatorStatement.setString(1, request.getParameter("babbleIDLink"));
@@ -117,20 +131,29 @@ public final class babble_detailsServlet extends HttpServlet {
 			//likeButton
 			
 		    if (request.getParameter("likeButton") != null) {
-		    		//PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
 		    	
-		    		myDeleteStatement = myConnection.prepareStatement("DELETE FROM LikesBabble WHERE username=? AND babble=?");
-		    		myDeleteStatement.setString(1, initialUserID);
-		    		myDeleteStatement.setString(2, request.getParameter("babbleIDLink"));
-		    		myDeleteStatement.executeUpdate();
-		    		
-		 			myPrepStatement = myConnection.prepareStatement("INSERT INTO LikesBabble (username, babble, type) VALUES ( ? , ? , 'like')");
+		    	if(request.getParameter("likeButton").toString().equals("Like")){
+		    		myPrepStatement = myConnection.prepareStatement("INSERT INTO LikesBabble (username, babble, type) VALUES ( ? , ? , 'like')");
 		 			myPrepStatement.setString(1, initialUserID);
 		 			myPrepStatement.setString(2, request.getParameter("babbleIDLink"));	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
 		 			myPrepStatement.executeUpdate();
-		    		//myUpdateStatement.executeUpdate();
+		 			doGet(request, response);
+		 			
+		    	}else if(request.getParameter("likeButton").toString().equals("Dont Like")){
+		    		PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
 		    		
-				    doGet(request, response);
+		    		/*myDeleteStatement = myConnection.prepareStatement("DELETE FROM LikesBabble WHERE username=? AND babble=?");
+		    		myDeleteStatement.setString(1, initialUserID);
+		    		myDeleteStatement.setString(2, request.getParameter("babbleIDLink"));
+		    		myDeleteStatement.executeUpdate();
+		    		*/
+		    		myUpdateStatement.setString(1, initialUserID);
+		    		myUpdateStatement.setString(2, request.getParameter("babbleIDLink"));
+		    		myUpdateStatement.executeUpdate();
+		    	}
+		 			
+		    		
+				    
 		    }
 		    
 		    //DislikeButton
