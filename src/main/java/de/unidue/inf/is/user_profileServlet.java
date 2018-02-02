@@ -158,10 +158,10 @@ public final class user_profileServlet extends HttpServlet {
 			request.setAttribute("blockedStatus", "display:none");
 			request.setAttribute("blockedReason", "You are blocked. Reason:");
 			String tempReason = resultSet.getString("reason");
-			if(tempReason != null){
+			if(tempReason == null){
 			request.setAttribute("reasons", "test1");
 			}
-			if(tempReason != ""){
+			if(tempReason == ""){
 				request.setAttribute("reasons", "test2");
 				}
 		}
