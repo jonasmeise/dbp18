@@ -177,13 +177,14 @@ public final class user_profileServlet extends HttpServlet {
    		
    		//Babbles
     	 try {	
-    		 String SQLString = "((SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ? ) UNION ALL (SELECT b.text,b.created,b.creator, b.id FROM babble b INNER JOIN likesBabble lb ON b.id=lb.babble WHERE username = ? ) UNION ALL (SELECT b.text,b.created,b.creator,b.id FROM babble b INNER JOIN rebabble rb ON rb.babble=b.id WHERE rb.username = ? ) )ORDER BY b.created DESC";
+    		 String SQLString = "(SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ? ) UNION ALL (SELECT b.text,b.created,b.creator, b.id FROM babble b INNER JOIN likesBabble lb ON b.id=lb.babble WHERE username = ? ) UNION ALL (SELECT b.text,b.created,b.creator,b.id FROM babble b INNER JOIN rebabble rb ON rb.babble=b.id WHERE rb.username = ? )";
     		 String oldString ="SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ?";
+    		 String testString ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesBabble lb WHERE b.creator = ? GROUP BY b.text,b.created,b.creator,b.id ";
  			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
- 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(SQLString);
+ 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(testString);
  			myBabbleStatement.setString(1, userID);
- 			myBabbleStatement.setString(2, userID);
- 			myBabbleStatement.setString(3, userID);
+ 			//myBabbleStatement.setString(2, userID);
+ 			//myBabbleStatement.setString(3, userID);
  			ResultSet resultSet = myBabbleStatement.executeQuery();
  			
  			/*myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
@@ -199,7 +200,7 @@ public final class user_profileServlet extends HttpServlet {
  			
  	
  		while (resultSet.next()){					
- 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"","","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
+ 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),resultSet.getString("likes").toString(),"","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
  				request.setAttribute("babblelist", babblelist); 
  		}
  		/*//TODO muss man alles in wieder eine große SQL packen mit UNION oder so 
