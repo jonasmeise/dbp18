@@ -178,30 +178,37 @@ public final class user_profileServlet extends HttpServlet {
    		//Babbles
     	 try {	
  			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
- 			PreparedStatement myBabbleStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble WHERE creator = ? ORDER BY id DESC");
+ 			PreparedStatement myBabbleStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble WHERE creator = ? ORDER BY created DESC");
  			myBabbleStatement.setString(1, userID);
  			ResultSet resultSet = myBabbleStatement.executeQuery();
  			
- 			/*myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
- 			PreparedStatement myLikedStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble WHERE creator = ? ORDER BY id DESC");
- 			myLikedStatement.setString(1, userID);
- 			ResultSet likeResultSet = myLikedStatement.executeQuery();
- 			*/
  			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
- 			PreparedStatement myRebabbleStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id FROM babble b, rebabble rb WHERE rb.babble=b.id AND rb.username = ? ORDER BY b.id DESC");
+ 			PreparedStatement myLikedStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id FROM babble b, likesBabble lb WHERE b.id=lb.babble AND username = ? ORDER BY b.created DESC");
+ 			myLikedStatement.setString(1, userID);
+ 			ResultSet likedResultSet = myLikedStatement.executeQuery();
+ 			
+ 			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
+ 			PreparedStatement myRebabbleStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id FROM babble b, rebabble rb WHERE rb.babble=b.id AND rb.username = ? ORDER BY b.created DESC");
  			myRebabbleStatement.setString(1, userID);
  			ResultSet rebabbleResultSet = myRebabbleStatement.executeQuery();
  			
  	
- 		while (resultSet.next()){					//resultSet.getString("likes").toString()
+ 		while (resultSet.next()){					
  				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"","","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
  				request.setAttribute("babblelist", babblelist); 
  		}
- 		
- 		while (rebabbleResultSet.next()){					//resultSet.getString("likes").toString()
+ 		//TODO muss man alles in wieder eine große SQL packen mit UNION oder so 
+ 		while (rebabbleResultSet.next()){				
  			babblelist.add(new Babble(rebabbleResultSet.getString("creator").toString(),rebabbleResultSet.getString("text").toString(),rebabbleResultSet.getString("created").toString(),"","","",rebabbleResultSet.getString("id"))); //ID klappt nicht zu übergeben
  			request.setAttribute("babblelist", babblelist); 
  		}
+ 		
+ 		while (likedResultSet.next()){					
+				babblelist.add(new Babble(likedResultSet.getString("creator").toString(),likedResultSet.getString("text").toString(),likedResultSet.getString("created").toString(),"","","",likedResultSet.getString("id"))); //ID klappt nicht zu übergeben
+				request.setAttribute("babblelist", babblelist); 
+		}
+ 		
+ 		
  		
  		
  		} catch (SQLException e) {
