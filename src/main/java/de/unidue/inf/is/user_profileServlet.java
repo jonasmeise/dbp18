@@ -177,13 +177,13 @@ public final class user_profileServlet extends HttpServlet {
    		
    		//Babbles
     	 try {	
-    		 String SQLString = "SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ?  UNION (SELECT b.text,b.created,b.creator,b.id FROM babble b, likesBabble lb WHERE b.id=lb.babble AND username = ? )UNION (SELECT b.text,b.created,b.creator,b.id FROM babble b, rebabble rb WHERE rb.babble=b.id AND rb.username = ? )ORDER BY b.created DESC";
+    		 String SQLString = "SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ?  UNION ALL (SELECT b.text,b.created,b.creator, b.id FROM babble b INNER JOIN likesBabble lb ON b.id=lb.babble WHERE username = ? )UNION (SELECT b.text,b.created,b.creator,b.id FROM babble b, rebabble rb WHERE rb.babble=b.id AND rb.username = ? )ORDER BY b.created DESC";
     		 String oldString ="SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ?";
  			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
- 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(oldString);
+ 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(SQLString);
  			myBabbleStatement.setString(1, userID);
- 			//myBabbleStatement.setString(2, userID);
- 			//myBabbleStatement.setString(3, userID);
+ 			myBabbleStatement.setString(2, userID);
+ 			myBabbleStatement.setString(3, userID);
  			ResultSet resultSet = myBabbleStatement.executeQuery();
  			
  			/*myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
