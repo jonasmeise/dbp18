@@ -177,7 +177,7 @@ public final class user_profileServlet extends HttpServlet {
    		
    		//Babbles
     	 try {	
-    		 //Der hier geht, müssen noch irgendwie sortiert werden
+    		 //Der hier geht, müssen noch irgendwie sortiert werden, created ist aber echt nur created und nicht liked
     		 String SQLString = "SELECT text,created,creator,id FROM ((SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ? ) UNION ALL (SELECT b.text,b.created,b.creator, b.id FROM babble b INNER JOIN likesBabble lb ON b.id=lb.babble WHERE username = ? ) UNION ALL (SELECT b.text,b.created,b.creator,b.id FROM babble b INNER JOIN rebabble rb ON rb.babble=b.id WHERE rb.username = ?)) ORDER BY created DESC";
     		 //Der geht auch aber ohne likes und rebabbles
     		 String oldString ="SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ?";
