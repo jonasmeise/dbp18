@@ -179,7 +179,7 @@ public final class user_profileServlet extends HttpServlet {
     	 try {	
     		 String SQLString = "(SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ? ) UNION ALL (SELECT b.text,b.created,b.creator, b.id FROM babble b INNER JOIN likesBabble lb ON b.id=lb.babble WHERE username = ? ) UNION ALL (SELECT b.text,b.created,b.creator,b.id FROM babble b INNER JOIN rebabble rb ON rb.babble=b.id WHERE rb.username = ? )";
     		 String oldString ="SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ?";
-    		 String testString ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesBabble lb WHERE b.creator = ? GROUP BY b.text,b.created,b.creator,b.id ";
+    		 String testString ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesBabble lb ON lb.babble=b.id WHERE b.creator = ? GROUP BY b.text,b.created,b.creator,b.id ";
  			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
  			PreparedStatement myBabbleStatement = myConnection.prepareStatement(testString);
  			myBabbleStatement.setString(1, userID);
