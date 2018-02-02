@@ -17,6 +17,8 @@ public final class babble_detailsServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final String initialUserID = "FooBar";
+    private String likeValue = "Like";
+	private String dislikeValue = "Dislike";
 
 
     @Override
@@ -31,8 +33,8 @@ public final class babble_detailsServlet extends HttpServlet {
 		request.setAttribute("rebabbles", 0);
 		request.setAttribute("rebabbleValue", "Rebabble");
 		request.setAttribute("deleteType", "submit");
-		request.setAttribute("likeValue", "Like");
-		request.setAttribute("dislikeValue", "Dislike");
+		request.setAttribute("likeValue", likeValue);
+		request.setAttribute("dislikeValue", dislikeValue);
 		
     	try {
  			myConnection = myDB.getConnection("babble");
@@ -54,7 +56,8 @@ public final class babble_detailsServlet extends HttpServlet {
  		 		myLikedStatement.setString(2, initialUserID);
  				ResultSet likedSet = myLikedStatement.executeQuery();
  				while(likedSet.next()){
- 				request.setAttribute("likeValue", "Dont Like");
+ 					likeValue = "Dont Like";
+ 					request.setAttribute("likeValue", likeValue);
  				}
  				
  				//check if already disliked
@@ -64,7 +67,8 @@ public final class babble_detailsServlet extends HttpServlet {
  		 		myDislikedStatement.setString(2, initialUserID);
  				ResultSet dislikedSet = myDislikedStatement.executeQuery();
  				while(dislikedSet.next()){
- 				request.setAttribute("dislikeValue", "Dont Dislike");
+ 					dislikeValue = "Dont Dislike";
+ 					request.setAttribute("dislikeValue", dislikeValue);
  				}
  				
  			//check who is creator for deleteButton
@@ -144,7 +148,7 @@ public final class babble_detailsServlet extends HttpServlet {
 		    if (request.getParameter("likeButton") != null) {
 		    	
 		    	if(request.getParameter("likeButton").toString().equals("Like")){
-		    		if(request.getParameter("dislikeButton").toString().equals("Dont Dislike")){
+		    		if(dislikeValue.equals("Dont Dislike")){
 		    			PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
 			    		myUpdateStatement.setString(1, initialUserID);
 			    		myUpdateStatement.setString(2, request.getParameter("babbleIDLink"));
@@ -176,7 +180,7 @@ public final class babble_detailsServlet extends HttpServlet {
 if (request.getParameter("dislikeButton") != null) {
 		    	
 		    	if(request.getParameter("dislikeButton").toString().equals("Dislike")){
-		    		if(request.getParameter("likeButton").toString().equals("Dont like")){
+		    		if(likeValue.equals("Dont Like")){
 		    			PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='dislike' WHERE username=? AND babble=?");
 			    		myUpdateStatement.setString(1, initialUserID);
 			    		myUpdateStatement.setString(2, request.getParameter("babbleIDLink"));
