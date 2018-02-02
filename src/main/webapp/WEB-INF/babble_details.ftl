@@ -23,7 +23,7 @@
 
     <div class="inner">
 <form method="post" action="./babble_details?babbleIDLink=${babbleid}"> 
-<input type="submit" name="dislikeButton" value="Dislike"/>
+<input type="submit" name="dislikeButton" value="${dislikeValue}"/>
 </form>
 </div>
 
