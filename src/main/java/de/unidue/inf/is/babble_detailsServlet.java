@@ -30,17 +30,27 @@ public final class babble_detailsServlet extends HttpServlet {
 		request.setAttribute("dislikes", 0);
 		request.setAttribute("rebabbles", 0);
 		request.setAttribute("rebabbleValue", "Rebabble");
+		request.setAttribute("deleteType", "submit");
 		
     	try {
  			myConnection = myDB.getConnection("babble");
  			
  	
- 		 	PreparedStatement myStatement =  myConnection.prepareStatement("SELECT babble FROM Rebabble WHERE babble = ? AND username = ? ");
+ 		 		PreparedStatement myStatement =  myConnection.prepareStatement("SELECT babble FROM Rebabble WHERE babble = ? AND username = ? ");
  				myStatement.setString(1, request.getParameter("babbleIDLink"));
  		 		myStatement.setString(2, initialUserID);
  				ResultSet rebabbleValueSet = myStatement.executeQuery();
  				while(rebabbleValueSet.next()){
  				request.setAttribute("rebabbleValue", "Dont Rebabble");
+ 				}
+ 				
+ 				PreparedStatement creatorStatement =  myConnection.prepareStatement("SELECT creator FROM Babble WHERE id = ?");
+ 				creatorStatement.setString(1, request.getParameter("babbleIDLink"));
+ 				ResultSet creatorSet = creatorStatement.executeQuery();
+ 				while(creatorSet.next()){
+ 					if(!creatorSet.getString("creator").equals(initialUserID)){
+ 						request.setAttribute("deleteType", "hidden");
+ 					}
  				}
  			
  			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text, created, creator FROM babble WHERE id = ?");

@@ -35,7 +35,7 @@
     
     <div class="inner">
 <form method="post" action="./babble_details?babbleIDLink=${babbleid}">
-<input type="submit" name="deleteButton" value="Delete"/>
+<input type="${deleteType}" name="deleteButton" value="Delete"/>
 </form>
 </div>
 </div>
