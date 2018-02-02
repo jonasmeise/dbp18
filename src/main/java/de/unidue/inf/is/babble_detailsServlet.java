@@ -150,6 +150,7 @@ public final class babble_detailsServlet extends HttpServlet {
 		    		myUpdateStatement.setString(1, initialUserID);
 		    		myUpdateStatement.setString(2, request.getParameter("babbleIDLink"));
 		    		myUpdateStatement.executeUpdate();
+		    		doGet(request, response);
 		    	}
 		 			
 		    		
