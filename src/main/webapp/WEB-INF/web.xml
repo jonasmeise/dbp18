@@ -108,6 +108,16 @@
 		<url-pattern>/babble_details</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>babble_topLikedServlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.babble:topLikedServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>babble_topLikedServlet</servlet-name>
+		<url-pattern>/babble_topLiked</url-pattern>
+	</servlet-mapping>
+	
 
 	<!-- Prevent the visiting of MVC Views from outside the servlet container. 
 		RequestDispatcher.forward/include should and will still work. Removing this 

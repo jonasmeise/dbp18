@@ -144,14 +144,14 @@ public final class user_profileServlet extends HttpServlet {
    	
    	//Check if you are blocked, funktioniert noch nicht, SQL ist richtig?
    	
-   	request.setAttribute("blockedReason", "");
+   	request.setAttribute("blockedReason", "You are not blocked.");
 	request.setAttribute("blockedStatus", "display:inline");
-	 
-   	/*	try {
+	
+   		try {
 			myConnection = myDB.getConnection("babble");
 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT blocker, blockee FROM blocks where blocker = ? AND blockee = ?");
 			myPrepStatement.setString(1, userID);
-			myPrepStatement.setString(1, initialUserID);
+			myPrepStatement.setString(2, initialUserID);
 			ResultSet resultSet = myPrepStatement.executeQuery();
 			
 		while (resultSet.next()){	
@@ -168,7 +168,7 @@ public final class user_profileServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} */
+		} 
    		
    		//Babbles
     	 try {

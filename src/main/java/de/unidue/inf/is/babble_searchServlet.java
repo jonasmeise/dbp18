@@ -42,7 +42,7 @@ public final class babble_searchServlet extends HttpServlet {
  			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble WHERE text LIKE ? ORDER BY id DESC");
  			myPrepStatement.setString(1,"%"+searched+"%");
  			ResultSet resultSet = myPrepStatement.executeQuery();
-//TODO ID WIRD NICHT ÜBERGEBEN UND man kann nicht zu babble details!
+
  		while (resultSet.next()){
 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"","","",resultSet.getString("id").toString())); //ID klappt nicht zu übergeben
 			request.setAttribute("babblelist", babblelist);
