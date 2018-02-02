@@ -177,13 +177,16 @@ public final class user_profileServlet extends HttpServlet {
    		
    		//Babbles
     	 try {	
+    		 //Der hier geht, müssen noch irgendwie sortiert werden
     		 String SQLString = "(SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ? ) UNION ALL (SELECT b.text,b.created,b.creator, b.id FROM babble b INNER JOIN likesBabble lb ON b.id=lb.babble WHERE username = ? ) UNION ALL (SELECT b.text,b.created,b.creator,b.id FROM babble b INNER JOIN rebabble rb ON rb.babble=b.id WHERE rb.username = ? )";
+    		 //Der geht auch aber ohne likes und rebabbles
     		 String oldString ="SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ?";
-    		 String testString ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesBabble lb ON lb.babble=b.id WHERE b.creator = ? AND lb.username = ? GROUP BY b.text,b.created,b.creator,b.id ";
+    		 //kA wieso das wieder zu lang ist
+    		 String testString ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesBabble lb ON lb.username=b.creator WHERE lb.type='like' AND b.creator = ? GROUP BY b.text,b.created,b.creator,b.id ";
  			myConnection = myDB.getConnection("babble");	
  			PreparedStatement myBabbleStatement = myConnection.prepareStatement(testString);
  			myBabbleStatement.setString(1, userID);
- 			myBabbleStatement.setString(2, userID);
+ 			//myBabbleStatement.setString(2, userID);
  			//myBabbleStatement.setString(3, userID);
  			ResultSet resultSet = myBabbleStatement.executeQuery();
  			
