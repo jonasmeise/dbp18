@@ -110,7 +110,7 @@
 	
 	<servlet>
 		<servlet-name>babble_topLikedServlet</servlet-name>
-		<servlet-class>de.unidue.inf.is.babble:topLikedServlet</servlet-class>
+		<servlet-class>de.unidue.inf.is.babble_topLikedServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
