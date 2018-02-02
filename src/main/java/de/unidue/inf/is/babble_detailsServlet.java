@@ -28,6 +28,9 @@ public final class babble_detailsServlet extends HttpServlet {
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		
+		likeValue="Like";
+		dislikeValue="Dislike";
+		
 		request.setAttribute("likes", 0);
 		request.setAttribute("dislikes", 0);
 		request.setAttribute("rebabbles", 0);
