@@ -195,11 +195,13 @@ public final class user_profileServlet extends HttpServlet {
  	
  		while (resultSet.next()){					//resultSet.getString("likes").toString()
  				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"","","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
+ 				request.setAttribute("babblelist", babblelist); 
  		}
  		
  		while (rebabbleResultSet.next()){					//resultSet.getString("likes").toString()
-				babblelist.add(new Babble(rebabbleResultSet.getString("creator").toString(),rebabbleResultSet.getString("text").toString(),rebabbleResultSet.getString("created").toString(),"","","",rebabbleResultSet.getString("id"))); //ID klappt nicht zu übergeben
-		}
+ 			babblelist.add(new Babble(rebabbleResultSet.getString("creator").toString(),rebabbleResultSet.getString("text").toString(),rebabbleResultSet.getString("created").toString(),"","","",rebabbleResultSet.getString("id"))); //ID klappt nicht zu übergeben
+ 			request.setAttribute("babblelist", babblelist); 
+ 		}
  		
  		
  		} catch (SQLException e) {
@@ -213,7 +215,7 @@ public final class user_profileServlet extends HttpServlet {
  				e.printStackTrace();
  			}
  		}
-    	request.setAttribute("babblelist", babblelist);   
+    	  
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
        
       
