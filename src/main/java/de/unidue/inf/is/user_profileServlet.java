@@ -182,11 +182,11 @@ public final class user_profileServlet extends HttpServlet {
  			myBabbleStatement.setString(1, userID);
  			ResultSet resultSet = myBabbleStatement.executeQuery();
  			
- 			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
+ 			/*myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
  			PreparedStatement myLikedStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble WHERE creator = ? ORDER BY id DESC");
  			myLikedStatement.setString(1, userID);
  			ResultSet likeResultSet = myLikedStatement.executeQuery();
- 			
+ 			*/
  			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
  			PreparedStatement myRebabbleStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble, rebabble WHERE babble=id AND username = ? ORDER BY id DESC");
  			myRebabbleStatement.setString(1, userID);
@@ -200,7 +200,7 @@ public final class user_profileServlet extends HttpServlet {
  		while (rebabbleResultSet.next()){					//resultSet.getString("likes").toString()
 				babblelist.add(new Babble(rebabbleResultSet.getString("creator").toString(),rebabbleResultSet.getString("text").toString(),rebabbleResultSet.getString("created").toString(),"","","",rebabbleResultSet.getString("id"))); //ID klappt nicht zu übergeben
 		}
- 		request.setAttribute("babblelist", babblelist);
+ 		
  		
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
@@ -213,7 +213,7 @@ public final class user_profileServlet extends HttpServlet {
  				e.printStackTrace();
  			}
  		}
-			    
+    	request.setAttribute("babblelist", babblelist);   
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
        
       
