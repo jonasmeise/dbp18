@@ -29,7 +29,7 @@
 
     <div class="inner">
 <form method="post" action="./babble_details?babbleIDLink=${babbleid}"> 
-<input type="submit" name="rebabbleButton" value="Rebabble"/>
+<input type="submit" name="rebabbleButton" value="${rebabbleValue}"/>
 </form>
 </div>
     

@@ -29,9 +29,19 @@ public final class babble_detailsServlet extends HttpServlet {
 		request.setAttribute("likes", 0);
 		request.setAttribute("dislikes", 0);
 		request.setAttribute("rebabbles", 0);
+		request.setAttribute("rebabbleValue", "Rebabble");
 		
     	try {
  			myConnection = myDB.getConnection("babble");
+ 			
+ 	
+ 		 	PreparedStatement myStatement =  myConnection.prepareStatement("SELECT babble FROM Rebabble WHERE babble = ? AND username = ? ");
+ 				myStatement.setString(1, request.getParameter("babbleIDLink"));
+ 		 		myStatement.setString(2, initialUserID);
+ 				ResultSet rebabbleValueSet = myStatement.executeQuery();
+ 				while(rebabbleValueSet.next()){
+ 				request.setAttribute("rebabbleValue", "Dont Rebabble");
+ 				}
  			
  			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text, created, creator FROM babble WHERE id = ?");
  			myPrepStatement.setString(1, request.getParameter("babbleIDLink"));	
@@ -94,6 +104,8 @@ public final class babble_detailsServlet extends HttpServlet {
 			PreparedStatement myPrepStatement;
 			PreparedStatement myDeleteStatement;
 			
+			//likeButton
+			
 		    if (request.getParameter("likeButton") != null) {
 		    		//PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
 		    	
@@ -111,6 +123,7 @@ public final class babble_detailsServlet extends HttpServlet {
 				    doGet(request, response);
 		    }
 		    
+		    //DislikeButton
 		    
 		    if (request.getParameter("dislikeButton") != null) {
 		    	//PreparedStatement myUpdateStatement = myConnection.prepareStatement("UPDATE LikesBabble SET type='like' WHERE username=? AND babble=?");
@@ -127,19 +140,29 @@ public final class babble_detailsServlet extends HttpServlet {
 		    		//myUpdateStatement.executeUpdate();
 				    doGet(request, response);
 		    }
+		    
+		    //rebabbleButton
+		    
 		    if (request.getParameter("rebabbleButton") != null) {
 		    	
-			    	myDeleteStatement = myConnection.prepareStatement("DELETE FROM Rebabble WHERE username=? AND babble=?");
-		    		myDeleteStatement.setString(1, initialUserID);
-	    			myDeleteStatement.setString(2, request.getParameter("babbleIDLink"));
-	    			myDeleteStatement.executeUpdate();
-    			
-		 			myPrepStatement = myConnection.prepareStatement("INSERT INTO ReBabble (username, babble) VALUES ( ? , ? )");
+		    	if(request.getParameter("rebabbleButton").toString().equals("Rebabble")){
+		    		myPrepStatement = myConnection.prepareStatement("INSERT INTO ReBabble (username, babble) VALUES ( ? , ? )");
 		 			myPrepStatement.setString(1, initialUserID);
 		 			myPrepStatement.setString(2, request.getParameter("babbleIDLink"));	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
 		 			myPrepStatement.executeUpdate();
 				    doGet(request, response);
+		    	}else if(request.getParameter("rebabbleButton").toString().equals("Dont Rebabble")){
+			    	myDeleteStatement = myConnection.prepareStatement("DELETE FROM Rebabble WHERE username=? AND babble=?");
+		    		myDeleteStatement.setString(1, initialUserID);
+	    			myDeleteStatement.setString(2, request.getParameter("babbleIDLink"));
+	    			myDeleteStatement.executeUpdate();
+	    			doGet(request, response);
+		    	}
+		 			
 		    }
+		    
+		    //DeleteButton
+		    
 		    if (request.getParameter("deleteButton") != null) {
 		 			myPrepStatement = myConnection.prepareStatement("DELETE FROM Babble WHERE id=? AND creator=?");
 		 			myPrepStatement.setString(1, request.getParameter("babbleIDLink"));	//übergebene ID des Babbles aus dem HMTL link=? als beispiel haben wir 3 übergeben.
@@ -160,6 +183,8 @@ public final class babble_detailsServlet extends HttpServlet {
  				e.printStackTrace();
  			}
  		}
+		
+		//Back to userpage Button
 		
 		if (request.getParameter("back") != null) {
 			

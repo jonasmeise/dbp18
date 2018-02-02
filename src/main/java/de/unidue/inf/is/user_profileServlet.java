@@ -84,7 +84,7 @@ public final class user_profileServlet extends HttpServlet {
 		    	request.setAttribute("followType","submit");
 		 }
     	 
-    	 request.setAttribute("follows", "Follow");
+    	request.setAttribute("follows", "Follow");
     	 
     	 
     	try {
