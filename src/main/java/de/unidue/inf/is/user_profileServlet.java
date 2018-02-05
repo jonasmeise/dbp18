@@ -203,7 +203,7 @@ public final class user_profileServlet extends HttpServlet {
  			
  	
  		while (resultSet.next()){					
- 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),resultSet.getString("text").toString(),"","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
+ 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("likes").toString(),resultSet.getString("text").toString(),"","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
  				request.setAttribute("babblelist", babblelist); 
  		}
  		/*//TODO muss man alles in wieder eine große SQL packen mit UNION oder so 

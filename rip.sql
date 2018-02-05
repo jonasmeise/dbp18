@@ -1,10 +1,7 @@
-
-
-CREATE TABLE Babble (
-  	id SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY,
-  	text VARCHAR(280) NOT NULL,
-  	created timestamp DEFAULT CURRENT TIMESTAMP, 
-  	creator VARCHAR(20) NOT NULL,
-  	PRIMARY KEY (id),
-  	FOREIGN KEY (creator) REFERENCES BabbleUser(username) ON DELETE CASCADE
-);
+INSERT INTO Babble
+	(text, creator)
+	values
+	('Dies ist mein erster Babble! Endlich kann ich meine Meinung über dieses tolle Datenbanken Praktikum loswerden!! :-)', 'dbuser'),
+	('Ich bin so aufgeregt! Bald kann ich meine Datenbanken-Skills demonstrieren !! :-)', 'student_1'),
+	('Ich mag Kaffee', 'FooBar')
+;
