@@ -184,7 +184,7 @@ public final class user_profileServlet extends HttpServlet {
     		 //kA wieso das wieder zu lang ist
     		 String testString ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesBabble lb ON lb.username=b.creator WHERE lb.type='like' AND b.creator = ? GROUP BY b.text,b.created,b.creator,b.id ";
  			myConnection = myDB.getConnection("babble");	
- 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(SQLString);
+ 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(testString);
  			myBabbleStatement.setString(1, userID);
  			myBabbleStatement.setString(2, userID);
  			myBabbleStatement.setString(3, userID);
