@@ -250,9 +250,9 @@ public final class user_profileServlet extends HttpServlet {
  			PreparedStatement myRebabbleStatement = myConnection.prepareStatement(rebabbleString);
  			String rebabbleCount = "0";
  			
- 			myLikesStatement.setString(1, resultSet.getString("id"));
- 			myDislikesStatement.setString(1, resultSet.getString("id"));
- 			myRebabbleStatement.setString(1, resultSet.getString("id"));
+ 			myLikesStatement.setString(1, likedResultSet2.getString("id"));
+ 			myDislikesStatement.setString(1, likedResultSet2.getString("id"));
+ 			myRebabbleStatement.setString(1, likedResultSet2.getString("id"));
  			
  			ResultSet likesResultSet = myLikesStatement.executeQuery();
  			ResultSet dislikesResultSet = myDislikesStatement.executeQuery();
@@ -270,6 +270,7 @@ public final class user_profileServlet extends HttpServlet {
  			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,resultSet.getString("id")));
 				request.setAttribute("babblelist2", babblelist); 
  		}
+ 		
  		while (rebabbleResultSet2.next()){
  	 		
  			String likesString ="SELECT b.id,count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='like' AND b.id=? GROUP BY b.id ";
@@ -282,9 +283,9 @@ public final class user_profileServlet extends HttpServlet {
  			PreparedStatement myRebabbleStatement = myConnection.prepareStatement(rebabbleString);
  			String rebabbleCount = "0";
  			
- 			myLikesStatement.setString(1, resultSet.getString("id"));
- 			myDislikesStatement.setString(1, resultSet.getString("id"));
- 			myRebabbleStatement.setString(1, resultSet.getString("id"));
+ 			myLikesStatement.setString(1, rebabbleResultSet2.getString("id"));
+ 			myDislikesStatement.setString(1, rebabbleResultSet2.getString("id"));
+ 			myRebabbleStatement.setString(1, rebabbleResultSet2.getString("id"));
  			
  			ResultSet likesResultSet = myLikesStatement.executeQuery();
  			ResultSet dislikesResultSet = myDislikesStatement.executeQuery();
