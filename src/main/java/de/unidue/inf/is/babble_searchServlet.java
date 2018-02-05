@@ -43,10 +43,39 @@ public final class babble_searchServlet extends HttpServlet {
  			myPrepStatement.setString(1,"%"+searched+"%");
  			ResultSet resultSet = myPrepStatement.executeQuery();
 
- 		while (resultSet.next()){
-			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"","","",resultSet.getString("id").toString())); //ID klappt nicht zu übergeben
-			request.setAttribute("babblelist", babblelist);
- 		}
+ 			while (resultSet.next()){
+ 		 		
+ 	 			String likesString ="SELECT b.id,count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='like' AND b.id=? GROUP BY b.id ";
+ 	 			PreparedStatement myLikesStatement = myConnection.prepareStatement(likesString);
+ 	 			String likeCount = "0";
+ 	 			String dislikesString ="SELECT b.id,count(lb.babble) AS dislikes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='dislike' AND b.id=? GROUP BY b.id ";
+ 	 			PreparedStatement myDislikesStatement = myConnection.prepareStatement(dislikesString);
+ 	 			String dislikeCount = "0";
+ 	 			String rebabbleString ="SELECT rb.babble ,count(rb.babble) AS rebabbles FROM rebabble rb WHERE rb.babble=? GROUP BY rb.babble ";
+ 	 			PreparedStatement myRebabbleStatement = myConnection.prepareStatement(rebabbleString);
+ 	 			String rebabbleCount = "0";
+ 	 			
+ 	 			myLikesStatement.setString(1, resultSet.getString("id"));
+ 	 			myDislikesStatement.setString(1, resultSet.getString("id"));
+ 	 			myRebabbleStatement.setString(1, resultSet.getString("id"));
+ 	 			
+ 	 			ResultSet likesResultSet = myLikesStatement.executeQuery();
+ 	 			ResultSet dislikesResultSet = myDislikesStatement.executeQuery();
+ 	 			ResultSet rebabblesResultSet = myRebabbleStatement.executeQuery();
+ 	 			
+ 	 			while(likesResultSet.next()){
+ 	 				likeCount = likesResultSet.getString("likes");
+ 	 			}
+ 	 			while(dislikesResultSet.next()){
+ 	 				dislikeCount = dislikesResultSet.getString("dislikes");
+ 	 			}
+ 	 			while(rebabblesResultSet.next()){
+ 	 				rebabbleCount = rebabblesResultSet.getString("rebabbles");
+ 	 			}
+ 	 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,resultSet.getString("id")));
+ 					request.setAttribute("babblelist", babblelist); 
+ 	 		}
+ 		
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();

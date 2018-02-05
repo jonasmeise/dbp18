@@ -305,16 +305,7 @@ public final class user_profileServlet extends HttpServlet {
  			babblelist3.add(new Babble(rebabbleResultSet2.getString("creator").toString(),rebabbleResultSet2.getString("text").toString(),rebabbleResultSet2.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,rebabbleResultSet2.getString("id")));
 				request.setAttribute("babblelist3", babblelist3); 
  		}
- 		/*//TODO muss man alles in wieder eine große SQL packen mit UNION oder so 
- 		while (rebabbleResultSet.next()){				
- 			babblelist.add(new Babble(rebabbleResultSet.getString("creator").toString(),rebabbleResultSet.getString("text").toString(),rebabbleResultSet.getString("created").toString(),"","","",rebabbleResultSet.getString("id"))); //ID klappt nicht zu übergeben
- 			request.setAttribute("babblelist", babblelist); 
- 		}
  		
- 		while (likedResultSet.next()){					
-				babblelist.add(new Babble(likedResultSet.getString("creator").toString(),likedResultSet.getString("text").toString(),likedResultSet.getString("created").toString(),"","","",likedResultSet.getString("id"))); //ID klappt nicht zu übergeben
-				request.setAttribute("babblelist", babblelist); 
-		}*/
  		
  		
  		
