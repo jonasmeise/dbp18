@@ -19,7 +19,6 @@ import java.util.List;
 
 public final class user_profileServlet extends HttpServlet {
 
-	private UtilityClass utility= null;
     private static final long serialVersionUID = 1L;
     private static final String initialUserID ="FooBar";	//unser User (wir)
     private String userID="FooBar";		//startseite (beginnend mit uns) und userID der jeweiligen Seiten
@@ -27,6 +26,8 @@ public final class user_profileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
                     throws ServletException, IOException {
+    	
+		UtilityClass utility= new UtilityClass();
     	
     	Connection myConnection = null;
 		DBUtil myDB = null;

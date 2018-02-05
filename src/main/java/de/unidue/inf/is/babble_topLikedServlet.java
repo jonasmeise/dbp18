@@ -19,7 +19,6 @@ import de.unidue.inf.is.utils.DBUtil;
 
 public final class babble_topLikedServlet extends HttpServlet  {
 	
-	private UtilityClass utility= null;
 	 private static final String initialUserID ="FooBar";
 
 	@Override
@@ -27,6 +26,8 @@ public final class babble_topLikedServlet extends HttpServlet  {
 		Connection myConnection = null;
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
+		
+		UtilityClass utility= new UtilityClass();
 		
 		try {	
    		String top5String ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON lb.babble=b.id WHERE lb.type ='like' GROUP BY  b.id,b.text,b.created,b.creator ORDER BY likes DESC FETCH FIRST 5 ROWS ONLY  ";

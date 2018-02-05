@@ -21,7 +21,6 @@ import de.unidue.inf.is.utils.DBUtil;
 
 public final class babble_searchServlet extends HttpServlet {
 
-	private UtilityClass utility= null;
     private static final long serialVersionUID = 1L;
     private String searched ="Ich";
 
@@ -38,6 +37,7 @@ public final class babble_searchServlet extends HttpServlet {
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
 		request.setAttribute("babblelist", babblelist);
+		UtilityClass utility = new UtilityClass();
 		
 		try {
  			myConnection = myDB.getConnection("babble");
@@ -46,7 +46,6 @@ public final class babble_searchServlet extends HttpServlet {
  			ResultSet resultSet = myPrepStatement.executeQuery();
  		
  			request.setAttribute("babblelist", utility.createMetaData(myConnection, resultSet));
- 			
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
