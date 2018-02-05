@@ -198,6 +198,8 @@ public final class user_profileServlet extends HttpServlet {
  			myRebabbleStatement.setString(1, userID);
  			ResultSet rebabbleResultSet = myRebabbleStatement.executeQuery();
  			
+ 			
+ 			
  			request.setAttribute("babblelist", myDB.createMetaData(myConnection, resultSet));
  			request.setAttribute("babblelist2", myDB.createMetaData(myConnection, likedResultSet));
  			request.setAttribute("babblelist3", myDB.createMetaData(myConnection, rebabbleResultSet));
@@ -215,6 +217,7 @@ public final class user_profileServlet extends HttpServlet {
  		}
     	  
         request.getRequestDispatcher("user_profile.ftl").forward(request, response);
+    	 
        
       
     }
