@@ -229,10 +229,10 @@ public final class user_profileServlet extends HttpServlet {
  				likeCount = likesResultSet.getString("likes");
  			}
  			while(dislikesResultSet.next()){
- 				dislikeCount = likesResultSet.getString("dislikes");
+ 				dislikeCount = dislikesResultSet.getString("dislikes");
  			}
  			while(rebabblesResultSet.next()){
- 				rebabbleCount = likesResultSet.getString("rebabbles");
+ 				rebabbleCount = rebabblesResultSet.getString("rebabbles");
  			}
  			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,resultSet.getString("id")));
 				request.setAttribute("babblelist", babblelist); 
