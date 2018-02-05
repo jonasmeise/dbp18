@@ -179,24 +179,17 @@ public final class user_profileServlet extends HttpServlet {
    		
    		//Babbles
     	 try {	
-    		 //Der hier geht, müssen noch irgendwie sortiert werden, created ist aber echt nur created und nicht liked
-    		 String SQLString = "SELECT text,created,creator,id FROM ((SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ? ) UNION ALL (SELECT b.text,b.created,b.creator, b.id FROM babble b INNER JOIN likesBabble lb ON b.id=lb.babble WHERE username = ? ) UNION ALL (SELECT b.text,b.created,b.creator,b.id FROM babble b INNER JOIN rebabble rb ON rb.babble=b.id WHERE rb.username = ?)) ORDER BY created DESC";
-    		 //Der geht auch aber ohne likes und rebabbles
+    
     		 String oldString ="SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ?";
-    		 //kA wieso das wieder zu lang ist
-    		String testString ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes, count(rb.babble) AS rebabbles, count(lb2.babble) AS dislikes FROM babble b INNER JOIN likesBabble lb ON lb.babble=b.id INNER JOIN rebabble rb ON rb.babble=b.id INNER JOIN likesBabble lb2 ON lb2.babble=b.id WHERE lb2.type='dislike' AND lb.type = 'like' AND creator= 'FooBar' GROUP BY b.id, b.text,b.created,b.creator";
- 			//String likesString ="SELECT b.id,count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='like'  GROUP BY b.id ";
- 			//Stringd
+    		 
     		myConnection = myDB.getConnection("babble");	
  			PreparedStatement myBabbleStatement = myConnection.prepareStatement(oldString);
- 			//PreparedStatement myLikesStatement = myConnection.prepareStatement(likesString);
  			myBabbleStatement.setString(1, userID);
- 			//myBabbleStatement.setString(2, userID);
- 			//myBabbleStatement.setString(3, userID);
+ 			
  			ResultSet resultSet = myBabbleStatement.executeQuery();
  			
- 			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
- 			PreparedStatement myLikedStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id FROM babble b, likesBabble lb WHERE b.id=lb.babble AND username = ? ORDER BY b.created DESC");
+ 			myConnection = myDB.getConnection("babble");	
+ 			PreparedStatement myLikedStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id FROM babble b, likesBabble lb WHERE lb.type ='like' AND b.id=lb.babble AND username = ? ORDER BY b.created DESC");
  			myLikedStatement.setString(1, userID);
  			ResultSet likedResultSet = myLikedStatement.executeQuery();
  			
