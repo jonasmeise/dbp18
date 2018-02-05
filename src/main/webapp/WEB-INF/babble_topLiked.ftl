@@ -1,8 +1,6 @@
 <html> 
 <body>
-<p> Babbles: </p>
-<p>${blockedReason} </p>
-<div style=${blockedStatus}>
+<p> TOP 5 Babbles: </p>
 <table class="datatable">
     <tr>
         <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Rebabbles</th> <th>Likes</th> <th>Dislikes</th>

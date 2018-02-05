@@ -26,18 +26,46 @@ public final class babble_topLikedServlet extends HttpServlet  {
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
 		
-		try {
- 			myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b JOIN LikesBabble lb ON b.id = lb.babble  WHERE lb.type = 'likes' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id ORDER BY b.id DESC
- 			PreparedStatement myPrepStatement = myConnection.prepareStatement("SELECT text,created,creator,id FROM babble WHERE creator = ? ORDER BY id DESC");
- 			myPrepStatement.setString(1, initialUserID);
- 			ResultSet resultSet = myPrepStatement.executeQuery();
- 			
- 	
- 		while (resultSet.next()){					//resultSet.getString("likes").toString()
- 				babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"","","",resultSet.getString("id"))); //ID klappt nicht zu übergeben
- 				request.setAttribute("babblelist", babblelist);
- 		
- 		}
+		try {	
+   		String top5String ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON lb.babble=b.id GROUP BY  b.text,b.created,b.creator,b.id FETCH FIRST 5 ROWS ONLY  ";
+   		myConnection = myDB.getConnection("babble");	
+			PreparedStatement myBabbleStatement = myConnection.prepareStatement(top5String);
+			ResultSet resultSet = myBabbleStatement.executeQuery();
+			
+	
+		while (resultSet.next()){
+		
+			String likesString ="SELECT b.id,count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='like' AND b.id=? GROUP BY b.id ";
+			PreparedStatement myLikesStatement = myConnection.prepareStatement(likesString);
+			String likeCount = "0";
+			String dislikesString ="SELECT b.id,count(lb.babble) AS dislikes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='dislike' AND b.id=? GROUP BY b.id ";
+			PreparedStatement myDislikesStatement = myConnection.prepareStatement(dislikesString);
+			String dislikeCount = "0";
+			String rebabbleString ="SELECT rb.babble ,count(rb.babble) AS rebabbles FROM rebabble rb WHERE rb.babble=? GROUP BY rb.babble ";
+			PreparedStatement myRebabbleStatement = myConnection.prepareStatement(rebabbleString);
+			String rebabbleCount = "0";
+			
+			myLikesStatement.setString(1, resultSet.getString("id"));
+			myDislikesStatement.setString(1, resultSet.getString("id"));
+			myRebabbleStatement.setString(1, resultSet.getString("id"));
+			
+			ResultSet likesResultSet = myLikesStatement.executeQuery();
+			ResultSet dislikesResultSet = myDislikesStatement.executeQuery();
+			ResultSet rebabblesResultSet = myRebabbleStatement.executeQuery();
+			
+			while(likesResultSet.next()){
+				likeCount = likesResultSet.getString("likes");
+			}
+			while(dislikesResultSet.next()){
+				dislikeCount = dislikesResultSet.getString("dislikes");
+			}
+			while(rebabblesResultSet.next()){
+				rebabbleCount = rebabblesResultSet.getString("rebabbles");
+			}
+			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,resultSet.getString("id")));
+				request.setAttribute("babblelist", babblelist); 
+		}
+		
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
