@@ -267,7 +267,7 @@ public final class user_profileServlet extends HttpServlet {
  			while(rebabblesResultSet.next()){
  				rebabbleCount = rebabblesResultSet.getString("rebabbles");
  			}
- 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,resultSet.getString("id")));
+ 			babblelist.add(new Babble(likedResultSet2.getString("creator").toString(),likedResultSet2.getString("text").toString(),likedResultSet2.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,likedResultSet2.getString("id")));
 				request.setAttribute("babblelist2", babblelist); 
  		}
  		
@@ -300,7 +300,7 @@ public final class user_profileServlet extends HttpServlet {
  			while(rebabblesResultSet.next()){
  				rebabbleCount = rebabblesResultSet.getString("rebabbles");
  			}
- 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,resultSet.getString("id")));
+ 			babblelist.add(new Babble(rebabbleResultSet2.getString("creator").toString(),rebabbleResultSet2.getString("text").toString(),rebabbleResultSet2.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,rebabbleResultSet2.getString("id")));
 				request.setAttribute("babblelist3", babblelist); 
  		}
  		/*//TODO muss man alles in wieder eine große SQL packen mit UNION oder so 
