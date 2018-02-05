@@ -80,11 +80,17 @@
 <td>${babble.dislikes}</td>
 <td>${babble.rebabbles}</td>
     </tr>
-    
-    
     </#list>
+  </table>
+  </div>
     
-     ${username} hat geliked:
+    <div style=${blockedStatus}>
+<table class="datatable">
+    <tr>
+        <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Likes</th> <th>Dislikes</th> <th>Rebabbles</th>
+    </tr>
+    <tr>
+    ${username} hat geliked:
     <#list babblelist2 as babble>
       <td><form align="left"  method="post" action="./user_profile">   
     <input type="submit" name="profileLink" value="${babble.creator}"/>
@@ -97,10 +103,17 @@
 <td>${babble.dislikes}</td>
 <td>${babble.rebabbles}</td>
     </tr>
-    
-    
     </#list>
-     ${username} hat rebabbled:
+  </table>
+  </div>
+    
+    <div style=${blockedStatus}>
+<table class="datatable">
+    <tr>
+        <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Likes</th> <th>Dislikes</th> <th>Rebabbles</th>
+    </tr>
+    <tr>
+    ${username} hat reposted:
     <#list babblelist3 as babble>
       <td><form align="left"  method="post" action="./user_profile">   
     <input type="submit" name="profileLink" value="${babble.creator}"/>
@@ -113,8 +126,6 @@
 <td>${babble.dislikes}</td>
 <td>${babble.rebabbles}</td>
     </tr>
-    
-    
     </#list>
   </table>
   </div>
