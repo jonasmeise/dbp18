@@ -209,13 +209,13 @@ public final class user_profileServlet extends HttpServlet {
  		
  			String likesString ="SELECT b.id,count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='like' AND b.id=? GROUP BY b.id ";
  			PreparedStatement myLikesStatement = myConnection.prepareStatement(likesString);
- 			String likeCount = null;
+ 			String likeCount = "0";
  			String dislikesString ="SELECT b.id,count(lb.babble) AS dislikes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='dislike' AND b.id=? GROUP BY b.id ";
  			PreparedStatement myDislikesStatement = myConnection.prepareStatement(dislikesString);
- 			String dislikeCount = null;
+ 			String dislikeCount = "0";
  			String rebabbleString ="SELECT rb.babble ,count(rb.babble) AS rebabbles FROM rebabble rb WHERE rb.babble=? GROUP BY rb.babble ";
  			PreparedStatement myRebabbleStatement = myConnection.prepareStatement(rebabbleString);
- 			String rebabbleCount = null;
+ 			String rebabbleCount = "0";
  			
  			myLikesStatement.setString(1, resultSet.getString("id"));
  			myDislikesStatement.setString(1, resultSet.getString("id"));
