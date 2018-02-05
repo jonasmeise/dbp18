@@ -186,7 +186,7 @@ public final class user_profileServlet extends HttpServlet {
  			//String likesString ="SELECT b.id,count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='like' id=3 GROUP BY b.id "
  			//String
     		myConnection = myDB.getConnection("babble");	
- 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(SQLString);
+ 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(testString);
  			//PreparedStatement myLikesStatement = myConnection.prepareStatement(likesString);
  			myBabbleStatement.setString(1, userID);
  			//myBabbleStatement.setString(2, userID);
