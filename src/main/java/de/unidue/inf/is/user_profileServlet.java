@@ -213,7 +213,7 @@ public final class user_profileServlet extends HttpServlet {
  			String dislikesString ="SELECT b.id,count(lb.babble) AS dislikes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='dislike' AND b.id=? GROUP BY b.id ";
  			PreparedStatement myDislikesStatement = myConnection.prepareStatement(dislikesString);
  			String dislikeCount = null;
- 			String rebabbleString ="SELECT rb.babble ,count(rb.babble) AS rebabbles FROM rebabbles rb WHERE rb.babble=? GROUP BY rb.babble ";
+ 			String rebabbleString ="SELECT rb.babble ,count(rb.babble) AS rebabbles FROM rebabble rb WHERE rb.babble=? GROUP BY rb.babble ";
  			PreparedStatement myRebabbleStatement = myConnection.prepareStatement(rebabbleString);
  			String rebabbleCount = null;
  			
