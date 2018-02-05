@@ -192,7 +192,7 @@ public final class user_profileServlet extends HttpServlet {
  			ResultSet resultSet = myBabbleStatement.executeQuery();
  			
  			myConnection = myDB.getConnection("babble");	
- 			PreparedStatement myLikedStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id FROM babble b, likesBabble lb WHERE  b.id=lb.babble AND username = ? ORDER BY b.created DESC");
+ 			PreparedStatement myLikedStatement = myConnection.prepareStatement("SELECT b.text,b.created,b.creator,b.id FROM babble b, likesBabble lb WHERE lb.type='like' AND  b.id=lb.babble AND username = ? ORDER BY b.created DESC");
  			myLikedStatement.setString(1, userID);
  			ResultSet likedResultSet = myLikedStatement.executeQuery();
  			//3
