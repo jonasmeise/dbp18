@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import de.unidue.inf.is.domain.Babble;
+import de.unidue.inf.is.domain.UtilityClass;
 import de.unidue.inf.is.utils.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public final class user_profileServlet extends HttpServlet {
 
+	private UtilityClass utility= null;
     private static final long serialVersionUID = 1L;
     private static final String initialUserID ="FooBar";	//unser User (wir)
     private String userID="FooBar";		//startseite (beginnend mit uns) und userID der jeweiligen Seiten
@@ -200,9 +202,9 @@ public final class user_profileServlet extends HttpServlet {
  			
  			
  			
- 			request.setAttribute("babblelist", myDB.createMetaData(myConnection, resultSet));
- 			request.setAttribute("babblelist2", myDB.createMetaData(myConnection, likedResultSet));
- 			request.setAttribute("babblelist3", myDB.createMetaData(myConnection, rebabbleResultSet));
+ 			request.setAttribute("babblelist", utility.createMetaData(myConnection, resultSet));
+ 			request.setAttribute("babblelist2", utility.createMetaData(myConnection, likedResultSet));
+ 			request.setAttribute("babblelist3", utility.createMetaData(myConnection, rebabbleResultSet));
  			
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block

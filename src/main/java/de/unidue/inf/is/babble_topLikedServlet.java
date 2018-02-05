@@ -14,10 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import de.unidue.inf.is.domain.Babble;
+import de.unidue.inf.is.domain.UtilityClass;
 import de.unidue.inf.is.utils.DBUtil;
 
 public final class babble_topLikedServlet extends HttpServlet  {
 	
+	private UtilityClass utility= null;
 	 private static final String initialUserID ="FooBar";
 
 	@Override
@@ -32,7 +34,7 @@ public final class babble_topLikedServlet extends HttpServlet  {
 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(top5String);
 			ResultSet resultSet = myBabbleStatement.executeQuery();
 			
-			request.setAttribute("babblelist", myDB.createMetaData(myConnection, resultSet));
+			request.setAttribute("babblelist", utility.createMetaData(myConnection, resultSet));
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
