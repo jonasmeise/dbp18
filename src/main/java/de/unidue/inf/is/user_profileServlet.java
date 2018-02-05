@@ -29,6 +29,8 @@ public final class user_profileServlet extends HttpServlet {
     	Connection myConnection = null;
 		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
+		List<Babble> babblelist2 = new ArrayList<>();
+		List<Babble> babblelist3 = new ArrayList<>();
 		
 		//SQL Abfrage für die Persönlichen Daten nach derzeitiger userID
     	
@@ -267,8 +269,8 @@ public final class user_profileServlet extends HttpServlet {
  			while(rebabblesResultSet.next()){
  				rebabbleCount = rebabblesResultSet.getString("rebabbles");
  			}
- 			babblelist.add(new Babble(likedResultSet2.getString("creator").toString(),likedResultSet2.getString("text").toString(),likedResultSet2.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,likedResultSet2.getString("id")));
-				request.setAttribute("babblelist2", babblelist); 
+ 			babblelist2.add(new Babble(likedResultSet2.getString("creator").toString(),likedResultSet2.getString("text").toString(),likedResultSet2.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,likedResultSet2.getString("id")));
+				request.setAttribute("babblelist2", babblelist2); 
  		}
  		
  		while (rebabbleResultSet2.next()){
@@ -300,8 +302,8 @@ public final class user_profileServlet extends HttpServlet {
  			while(rebabblesResultSet.next()){
  				rebabbleCount = rebabblesResultSet.getString("rebabbles");
  			}
- 			babblelist.add(new Babble(rebabbleResultSet2.getString("creator").toString(),rebabbleResultSet2.getString("text").toString(),rebabbleResultSet2.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,rebabbleResultSet2.getString("id")));
-				request.setAttribute("babblelist3", babblelist); 
+ 			babblelist3.add(new Babble(rebabbleResultSet2.getString("creator").toString(),rebabbleResultSet2.getString("text").toString(),rebabbleResultSet2.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,rebabbleResultSet2.getString("id")));
+				request.setAttribute("babblelist3", babblelist3); 
  		}
  		/*//TODO muss man alles in wieder eine große SQL packen mit UNION oder so 
  		while (rebabbleResultSet.next()){				
