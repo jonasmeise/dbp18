@@ -64,10 +64,44 @@
 <div style=${blockedStatus}>
 <table class="datatable">
     <tr>
-        <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Rebabbles</th> <th>Likes</th> <th>Dislikes</th>
+        <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Likes</th> <th>Dislikes</th> <th>Rebabbles</th>
     </tr>
     <tr>
+    ${username} hat geposted:
     <#list babblelist as babble>
+      <td><form align="left"  method="post" action="./user_profile">   
+    <input type="submit" name="profileLink" value="${babble.creator}"/>
+</form></td> 
+<td><form align="left" action="./babble_details?id=${babble.id}"> 
+    <input type="submit" name="babbleIDLink" value="${babble.id}"/> ${babble.text}
+</form></td> 
+<td>${babble.created}</td>
+<td>${babble.likes}</td>
+<td>${babble.dislikes}</td>
+<td>${babble.rebabbles}</td>
+    </tr>
+    
+    
+    </#list>
+    
+     ${username} hat geliked:
+    <#list babblelist2 as babble>
+      <td><form align="left"  method="post" action="./user_profile">   
+    <input type="submit" name="profileLink" value="${babble.creator}"/>
+</form></td> 
+<td><form align="left" action="./babble_details?id=${babble.id}"> 
+    <input type="submit" name="babbleIDLink" value="${babble.id}"/> ${babble.text}
+</form></td> 
+<td>${babble.created}</td>
+<td>${babble.likes}</td>
+<td>${babble.dislikes}</td>
+<td>${babble.rebabbles}</td>
+    </tr>
+    
+    
+    </#list>
+     ${username} hat rebabbled:
+    <#list babblelist3 as babble>
       <td><form align="left"  method="post" action="./user_profile">   
     <input type="submit" name="profileLink" value="${babble.creator}"/>
 </form></td> 

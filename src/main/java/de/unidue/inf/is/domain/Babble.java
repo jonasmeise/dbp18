@@ -11,6 +11,7 @@ public class Babble {
 	private String id="";
 	
 public Babble(String creator, String text, String created, String likes, String dislikes, String rebabbles,String id){
+	
 	this.setCreator(creator);
 	this.setText(text);
 	this.setCreated(created);
@@ -82,5 +83,6 @@ public String getRebabbles() {
 public void setRebabbles(String rebabbles) {
 	this.rebabbles = rebabbles;
 }
+
 
 }
