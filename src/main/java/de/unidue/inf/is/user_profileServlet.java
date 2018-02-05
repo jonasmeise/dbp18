@@ -209,14 +209,32 @@ public final class user_profileServlet extends HttpServlet {
  		
  			String likesString ="SELECT b.id,count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='like' AND b.id=? GROUP BY b.id ";
  			PreparedStatement myLikesStatement = myConnection.prepareStatement(likesString);
- 			String count = null;
+ 			String likeCount = null;
+ 			String dislikesString ="SELECT b.id,count(lb.babble) AS dislikes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='dislike' AND b.id=? GROUP BY b.id ";
+ 			PreparedStatement myDislikesStatement = myConnection.prepareStatement(dislikesString);
+ 			String dislikeCount = null;
+ 			String rebabbleString ="SELECT rb.babble ,count(rb.babble) AS rebabbles FROM rebabbles rb WHERE rb.babble=? GROUP BY rb.babble ";
+ 			PreparedStatement myRebabbleStatement = myConnection.prepareStatement(rebabbleString);
+ 			String rebabbleCount = null;
  			
  			myLikesStatement.setString(1, resultSet.getString("id"));
+ 			myDislikesStatement.setString(1, resultSet.getString("id"));
+ 			myRebabbleStatement.setString(1, resultSet.getString("id"));
+ 			
  			ResultSet likesResultSet = myLikesStatement.executeQuery();
+ 			ResultSet dislikesResultSet = myDislikesStatement.executeQuery();
+ 			ResultSet rebabblesResultSet = myRebabbleStatement.executeQuery();
+ 			
  			while(likesResultSet.next()){
- 				count = likesResultSet.getString("likes");
+ 				likeCount = likesResultSet.getString("likes");
  			}
- 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"",count,"",resultSet.getString("id")));
+ 			while(dislikesResultSet.next()){
+ 				dislikeCount = likesResultSet.getString("dislikes");
+ 			}
+ 			while(rebabblesResultSet.next()){
+ 				rebabbleCount = likesResultSet.getString("rebabbles");
+ 			}
+ 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,resultSet.getString("id")));
 				request.setAttribute("babblelist", babblelist); 
  		}
  		
