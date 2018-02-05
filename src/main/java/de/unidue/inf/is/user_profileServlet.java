@@ -182,12 +182,12 @@ public final class user_profileServlet extends HttpServlet {
     		 //Der geht auch aber ohne likes und rebabbles
     		 String oldString ="SELECT b.text,b.created,b.creator,b.id FROM babble b WHERE b.creator = ?";
     		 //kA wieso das wieder zu lang ist
-    		 String testString ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesBabble lb ON lb.username=b.creator WHERE  b.creator = ? GROUP BY b.text,b.created,b.creator,b.id HAVING lb.type='like'";
+    		 String testString ="SELECT b.text,b.created,b.creator,b.id, count(lb.babble) AS likes FROM babble b INNER JOIN likesBabble lb ON lb.username=b.creator WHERE lb.type='like' AND  b.creator = 'FooBar' GROUP BY b.text,b.created,b.creator,b.id";
  			myConnection = myDB.getConnection("babble");	
- 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(testString);
+ 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(SQLString);
  			myBabbleStatement.setString(1, userID);
- 			//myBabbleStatement.setString(2, userID);
- 			//myBabbleStatement.setString(3, userID);
+ 			myBabbleStatement.setString(2, userID);
+ 			myBabbleStatement.setString(3, userID);
  			ResultSet resultSet = myBabbleStatement.executeQuery();
  			
  			/*myConnection = myDB.getConnection("babble");	//SELECT b.text,b.created,b.creator,b.id,lb.babble, count(lb.babble) AS likes FROM babble b, LikesBabble lb WHERE b.id = lb.babble AND lb.type = 'like' AND b.creator = ? GROUP BY  b.text,b.created,b.creator,b.id,lb.babble ORDER BY b.id DESC
