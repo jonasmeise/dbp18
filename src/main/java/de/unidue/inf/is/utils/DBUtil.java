@@ -88,7 +88,7 @@ public final class DBUtil {
 
     public ArrayList<Babble> createMetaData(Connection myConnection, ResultSet resultSet) throws SQLException{
     	ArrayList<Babble> output = new ArrayList<Babble>();
-    	/* (resultSet.next()){
+    	 while (resultSet.next()){
  			String likesString ="SELECT b.id,count(lb.babble) AS likes FROM babble b INNER JOIN likesbabble lb ON b.id=lb.babble WHERE lb.type='like' AND b.id=? GROUP BY b.id ";
  			PreparedStatement myLikesStatement = myConnection.prepareStatement(likesString);
  			String likeCount = "0";
@@ -120,9 +120,7 @@ public final class DBUtil {
  			}
  			
  			output.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),likeCount,dislikeCount,rebabbleCount,resultSet.getString("id")));
- 		}*/
-    	
-    	output.add(new Babble("a","bc","10","0","1","3",""));
+ 		}
  		
  		return output;
     }
