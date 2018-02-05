@@ -24,7 +24,7 @@ public final class babble_topLikedServlet extends HttpServlet  {
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection myConnection = null;
-		DBUtil myDB = null; //a
+		DBUtil myDB = null; //ab
 		List<Babble> babblelist = new ArrayList<>();
 		
 		UtilityClass utility= new UtilityClass();
