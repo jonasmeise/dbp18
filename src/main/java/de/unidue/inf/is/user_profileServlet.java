@@ -27,7 +27,7 @@ public final class user_profileServlet extends HttpServlet {
                     throws ServletException, IOException {
     	
     	Connection myConnection = null;
-		DBUtil myDB = new DBUtil();
+		DBUtil myDB = null;
 		List<Babble> babblelist = new ArrayList<>();
 		List<Babble> babblelist2 = new ArrayList<>();
 		List<Babble> babblelist3 = new ArrayList<>();

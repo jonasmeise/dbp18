@@ -16,7 +16,7 @@ import de.unidue.inf.is.domain.Babble;
 
 public final class DBUtil {
 
-    public DBUtil() {
+    private DBUtil() {
     }
 
 
