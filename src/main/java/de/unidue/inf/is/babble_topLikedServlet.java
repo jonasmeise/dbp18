@@ -32,7 +32,7 @@ public final class babble_topLikedServlet extends HttpServlet  {
 			PreparedStatement myBabbleStatement = myConnection.prepareStatement(top5String);
 			ResultSet resultSet = myBabbleStatement.executeQuery();
 			
-			request.setAttribute("babblelist", myDB.createMetaData(myConnection, resultSet));	
+			request.setAttribute("babblelist", myDB.createMetaData(myConnection, resultSet));//3	
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
