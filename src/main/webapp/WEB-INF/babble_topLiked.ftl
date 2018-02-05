@@ -3,7 +3,7 @@
 <p> TOP 5 Babbles: </p>
 <table class="datatable">
     <tr>
-        <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Rebabbles</th> <th>Likes</th> <th>Dislikes</th>
+        <th>Creator</th>  <th>Text</th> <th>Created</th> <th>Likes</th> <th>Dislikes</th> <th>Rababbles</th>
     </tr>
     <tr>
     <#list babblelist as babble>
