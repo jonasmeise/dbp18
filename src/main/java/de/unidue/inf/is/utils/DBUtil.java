@@ -19,7 +19,7 @@ public final class DBUtil {
     private DBUtil() {
     }
 
-
+//s
     static {
         com.ibm.db2.jcc.DB2Driver driver = new DB2Driver();
         try {
