@@ -216,7 +216,7 @@ public final class user_profileServlet extends HttpServlet {
  			while(likesResultSet.next()){
  				count = likesResultSet.getString("likes");
  			}
- 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),resultSet.getString("rebabbles").toString(),count,resultSet.getString("dislikes").toString(),resultSet.getString("id")));
+ 			babblelist.add(new Babble(resultSet.getString("creator").toString(),resultSet.getString("text").toString(),resultSet.getString("created").toString(),"",count,"",resultSet.getString("id")));
 				request.setAttribute("babblelist", babblelist); 
  		}
  		
